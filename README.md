@@ -17,6 +17,10 @@ The sample application has the following requirements:
 The configuration file for the samples is ```dc-services-sdk-config.json```. Before the samples can be run, replace this 
 file with the dc-services-sdk-config.json you receive from Adobe when you submit the early access request form.
 
+The SDK also supports providing the authentication credentials at runtime, without storing them in a config file. Please
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
+know more.
+
 ## Build with maven
 
 Run the following command to build the project:
@@ -84,6 +88,17 @@ The sample class CreatePDFFromURL converts an HTML page specified by a URL to a 
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromURL 
+```
+
+#### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
+
+The sample class ```CreatePDFWithInMemoryAuthCredentials``` highlights how to provide in-memory auth credentials
+for performing an operation. This enables the clients to fetch the credentials from a secret server during runtime, 
+instead of storing them in a file.
+
+Before running the sample, authentication credentials need to be updated as per the instructions in the class. 
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFWithInMemoryAuthCredentials 
 ```
 
 ### Export PDF To Other Formats

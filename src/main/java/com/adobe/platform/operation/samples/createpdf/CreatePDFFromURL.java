@@ -39,8 +39,8 @@ public class CreatePDFFromURL {
 
         try {
 
-            // Initial setup, create a default ClientContext and a new operation instance.
-            ClientContext clientContext = ClientContext.createDefault();
+            // Initial setup, create a ClientContext using a config file, and a new operation instance.
+            ClientContext clientContext = ClientContext.createFromFile("dc-services-sdk-config.json");
             CreatePDFOperation htmlToPDFOperation = CreatePDFOperation.createNew();
 
             // Set operation input from a URL.

@@ -37,8 +37,8 @@ public class ExportPDFToDOCX {
 
         try {
 
-            // Initial setup, create a default ClientContext and a new operation instance by specifying the intended export format.
-            ClientContext clientContext = ClientContext.createDefault();
+            // Initial setup, create a ClientContext using a config file, and a new operation instance by specifying the intended export format.
+            ClientContext clientContext = ClientContext.createFromFile("dc-services-sdk-config.json");
             ExportPDFOperation exportPdfOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.DOCX);
 
             // Set operation input from a local PDF file
