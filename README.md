@@ -55,6 +55,14 @@ The sample class CreatePDFFromDOCX creates a PDF file from a DOCX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromDOCX 
 ```
 
+####  Create a PDF File From a DOCX Input Stream
+
+The sample class CreatePDFFromDOCXInputStream creates a PDF file from a DOCX input stream.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromDOCXInputStream 
+```
+
 ####  Create a PDF File From a DOCX File (Write to an OutputStream)
 
 The sample class CreatePDFFromDOCXToOutputStream creates a PDF file from a DOCX file. Instead of saving the result to a 
