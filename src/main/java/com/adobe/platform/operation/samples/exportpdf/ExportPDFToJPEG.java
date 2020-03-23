@@ -13,12 +13,14 @@ package com.adobe.platform.operation.samples.exportpdf;
 
 import java.io.IOException;
 
+import com.adobe.platform.operation.ExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adobe.platform.operation.ClientContext;
+import com.adobe.platform.operation.auth.Credentials;
 import com.adobe.platform.operation.exception.SdkException;
 import com.adobe.platform.operation.exception.ServiceApiException;
+import com.adobe.platform.operation.exception.ServiceUsageException;
 import com.adobe.platform.operation.io.FileRef;
 import com.adobe.platform.operation.pdfops.ExportPDFOperation;
 import com.adobe.platform.operation.pdfops.options.exportpdf.ExportPDFTargetFormat;
@@ -38,8 +40,13 @@ public class ExportPDFToJPEG {
     public static void main(String[] args) {
         try {
 
-            // Initial setup, create a ClientContext using a config file, and a new operation instance by specifying the intended export format.
-            ClientContext clientContext = ClientContext.createFromFile("dc-services-sdk-config.json");
+            // Initial setup, create credentials instance.
+            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
+                    .fromFile("dc-services-sdk-credentials.json")
+                    .build();
+
+            //Create an ExecutionContext using credentials and create a new operation instance.
+            ExecutionContext executionContext = ExecutionContext.create(credentials);
             ExportPDFOperation exportPdfOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.JPEG);
 
             // Set operation input from a source file.
@@ -47,12 +54,12 @@ public class ExportPDFToJPEG {
             exportPdfOperation.setInput(sourceFileRef);
 
             // Execute the operation.
-            FileRef result = exportPdfOperation.execute(clientContext);
+            FileRef result = exportPdfOperation.execute(executionContext);
 
             // Save the result to the specified location.
             result.saveAs("output/exportPDFToJPEG.zip");
 
-        } catch (ServiceApiException | IOException | SdkException ex) {
+        } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }

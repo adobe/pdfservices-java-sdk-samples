@@ -16,10 +16,11 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adobe.platform.operation.Authentication;
-import com.adobe.platform.operation.ClientContext;
+import com.adobe.platform.operation.ExecutionContext;
+import com.adobe.platform.operation.auth.Credentials;
 import com.adobe.platform.operation.exception.SdkException;
 import com.adobe.platform.operation.exception.ServiceApiException;
+import com.adobe.platform.operation.exception.ServiceUsageException;
 import com.adobe.platform.operation.io.FileRef;
 import com.adobe.platform.operation.pdfops.CreatePDFOperation;
 
@@ -39,33 +40,35 @@ public class CreatePDFWithInMemoryAuthCredentials {
 
         try {
 
-            // Initial setup, create a ClientContext using a config file.
-            ClientContext clientContext = ClientContext.createFromFile("dc-services-sdk-config.json");
             /*
-            Set this variable to the value of "identity" key in dc-services-sdk-config.json that you received in Adobe
-            Document Cloud Services SDK welcome email.
+            Initial setup, create credentials instance.
+            Replace the values of CLIENT_ID, CLIENT_SECRET, ORGANIZATION_ID and ACCOUNT_ID with their corresponding values
+            present in the dc-services-sdk-credentials.json file and PRIVATE_KEY_FILE_CONTENTS with contents of private.key file
+            within the zip file which must have been downloaded at the end of Getting the Credentials workflow.
             */
-            String authenticationJsonString = "";
+            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
+                    .withClientId("CLIENT_ID")
+                    .withClientSecret("CLIENT_SECRET")
+                    .withPrivateKey("PRIVATE_KEY_FILE_CONTENTS")
+                    .withOrganizationId("ORGANIZATION_ID")
+                    .withAccountId("ACCOUNT_ID")
+                    .build();
 
-            // Create a new ClientContext instance with the provided authentication credentials.
-            Authentication authentication = Authentication.create(authenticationJsonString);
-            ClientContext contextWithAuth = clientContext.withAuthentication(authentication);
-
-            // Create a new Operation instance.
+            //Create an ExecutionContext using credentials and create a new operation instance.
+            ExecutionContext executionContext = ExecutionContext.create(credentials);
             CreatePDFOperation createPDFOperation = CreatePDFOperation.createNew();
+
             // Set operation input from a source file.
             FileRef source = FileRef.createFromLocalFile("src/main/resources/createPDFInput.docx");
             createPDFOperation.setInput(source);
 
-            // Execute the operation using the ClientContext created with the provided Authentication credentials.
-            FileRef result = createPDFOperation.execute(contextWithAuth);
+            // Execute the operation.
+            FileRef result = createPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
             result.saveAs("output/createPDFWithInMemCredentials.pdf");
 
-        } catch (ServiceApiException | IOException | SdkException ex) {
-            LOGGER.warn("Please note that the variable authenticationJsonString needs to be initialized with the value " +
-                    "of \"identity\" key in dc-services-sdk-config.json file.");
+        } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }

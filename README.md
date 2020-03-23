@@ -3,7 +3,7 @@
 This sample project helps you get started with the DC services SDK.
 
 The sample classes illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
-the SDK.
+the SDK. **Please note that the DC Services SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
@@ -14,12 +14,18 @@ The sample application has the following requirements:
 
 ## Authentication Setup
 
-The configuration file for the samples is ```dc-services-sdk-config.json```. Before the samples can be run, replace this 
-file with the dc-services-sdk-config.json you receive from Adobe when you submit the early access request form.
+The credentials file and corresponding private key file for the samples is ```dc-services-sdk-credentials.json``` and ```private.key``` 
+respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
+the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
 The SDK also supports providing the authentication credentials at runtime, without storing them in a config file. Please
 refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
 know more.
+
+## Quota Exhaustion
+
+If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their quota 
+of 5000 pages. Please contact [here](https://www.adobe.com/go/dcsdk_requestform) to get the paid credentials.
 
 ## Build with maven
 
@@ -81,21 +87,24 @@ The sample class CreatePDFFromPPTX creates a PDF file from a PPTX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromPPTX
 ```
 
-#### Create a PDF File From HTML (via Zip Archive)
+#### Create a PDF File From Static HTML (via Zip Archive)
 
-The sample class CreatePDFFromHTML creates a PDF file from a zip file containing the input HTML file and its resources. 
+The sample class CreatePDFFromStaticHTML creates a PDF file from a zip file containing the input HTML file and its resources. 
 Please refer the documentation of CreatePDFOperation.java to see instructions on the structure of the zip file.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromHTML 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromStaticHTML 
 ```
 
-#### Create a PDF File From HTML (via URL)
+#### Create a PDF File From Dynamic HTML (via Zip Archive)
 
-The sample class CreatePDFFromURL converts an HTML page specified by a URL to a PDF file.
+The sample class CreatePDFFromDynamicHTML converts a zip file, containing the input HTML file and its resources, along 
+with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM, 
+thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML 
+dynamically and then, convert it into a PDF file.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromURL 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromDynamicHTML 
 ```
 
 #### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
@@ -107,6 +116,14 @@ instead of storing them in a file.
 Before running the sample, authentication credentials need to be updated as per the instructions in the class. 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFWithInMemoryAuthCredentials 
+```
+
+#### Create a PDF File From a DOCX File (By providing custom value for timeouts)
+
+The sample project CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFWithCustomTimeouts
 ```
 
 ### Export PDF To Other Formats
@@ -150,6 +167,28 @@ The sample class CombinePDFWithPageRanges combines specific pages of multiple PD
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.combine.CombinePDFWithPageRanges 
 ```
 
+### OCR PDF file
+
+These samples illustrates how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
+
+#### Convert PDF File to a searchable PDF file.
+
+The sample project OcrPDF converts a PDF file into a searchable PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.ocr.OcrPDF
+```
+
+#### Convert PDF file into a searchable file while keeping the original image.
+
+The sample project OcrPDFWithOptions converts a PDF file to a searchable PDF file with maximum fidelity to the original 
+image and default en-us locale. Refer to the documentation of OCRSupportedLocale and OCRSupportedType to see 
+the list of supported OCR locales and OCR types.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.ocr.OcrPDFWithOptions
+```
+
 ### Licensing
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
+This project is licensed under the MIT License. See [LICENSE](LICENSE.md) for more information.
