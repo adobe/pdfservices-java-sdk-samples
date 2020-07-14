@@ -9,12 +9,7 @@
  * written permission of Adobe.
  */
 
-package com.adobe.platform.operation.samples.createpdf;
-
-import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.adobe.platform.operation.samples.compresspdf;
 
 import com.adobe.platform.operation.ExecutionContext;
 import com.adobe.platform.operation.auth.Credentials;
@@ -22,40 +17,42 @@ import com.adobe.platform.operation.exception.SdkException;
 import com.adobe.platform.operation.exception.ServiceApiException;
 import com.adobe.platform.operation.exception.ServiceUsageException;
 import com.adobe.platform.operation.io.FileRef;
-import com.adobe.platform.operation.pdfops.CreatePDFOperation;
+import com.adobe.platform.operation.pdfops.CompressPDFOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
- * This sample illustrates how to create a PDF file from a DOCX file.
+ * This sample illustrates how to compress PDF by reducing the size of the PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-public class CreatePDFFromDOCX {
-
+public class CompressPDF {
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFFromDOCX.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CompressPDF.class);
 
     public static void main(String[] args) {
 
         try {
-
             // Initial setup, create credentials instance.
             Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
                     .fromFile("pdftools-api-credentials.json")
                     .build();
 
-            //Create an ExecutionContext using credentials and create a new operation instance.
+            // Create an ExecutionContext using credentials and create a new operation instance.
             ExecutionContext executionContext = ExecutionContext.create(credentials);
-            CreatePDFOperation createPdfOperation = CreatePDFOperation.createNew();
+            CompressPDFOperation compressPDFOperation = CompressPDFOperation.createNew();
 
             // Set operation input from a source file.
-            FileRef source = FileRef.createFromLocalFile("src/main/resources/createPDFInput.docx");
-            createPdfOperation.setInput(source);
+            FileRef source = FileRef.createFromLocalFile("src/main/resources/compressPDFInput.pdf");
+            compressPDFOperation.setInput(source);
 
-            // Execute the operation.
-            FileRef result = createPdfOperation.execute(executionContext);
+            // Execute the operation
+            FileRef result = compressPDFOperation.execute(executionContext);
 
-            // Save the result to the specified location.
-            result.saveAs("output/createPDFFromDOCX.pdf");
+            // Save the result at the specified location
+            result.saveAs("output/compressPDFOutput.pdf");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);

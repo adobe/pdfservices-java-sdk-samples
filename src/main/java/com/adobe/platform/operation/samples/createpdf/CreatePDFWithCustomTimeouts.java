@@ -43,7 +43,7 @@ public class CreatePDFWithCustomTimeouts {
 
             // Initial setup, create credentials instance.
             Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("dc-services-sdk-credentials.json")
+                    .fromFile("pdftools-api-credentials.json")
                     .build();
 
             // Create client config instance with custom time-outs.

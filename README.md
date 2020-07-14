@@ -1,9 +1,9 @@
-# Samples for the DC Services Java SDK
+# Samples for the PDF Tools Java SDK
 
-This sample project helps you get started with the DC services SDK.
+This sample project helps you get started with the PDF Tools Java SDK.
 
 The sample classes illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
-the SDK. **Please note that the DC Services SDK supports only server side use cases.**
+the SDK. **Please note that the PDF Tools Java SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
@@ -14,7 +14,7 @@ The sample application has the following requirements:
 
 ## Authentication Setup
 
-The credentials file and corresponding private key file for the samples is ```dc-services-sdk-credentials.json``` and ```private.key``` 
+The credentials file and corresponding private key file for the samples is ```pdftools-api-credentials.json``` and ```private.key``` 
 respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
 the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
@@ -24,8 +24,8 @@ know more.
 
 ## Quota Exhaustion
 
-If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their quota 
-of 5000 pages. Please contact [here](https://www.adobe.com/go/dcsdk_requestform) to get the paid credentials.
+If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their usage
+quota. Please [contact us](https://www.adobe.com/go/pdftoolsapi_requestform) to get paid credentials.
 
 ## Build with maven
 
@@ -34,7 +34,7 @@ Run the following command to build the project:
 mvn clean install
 ```
 
-Note that the DC Services SDK is listed as a dependency in the pom.xml and will be downloaded automatically.
+Note that the PDF Tools SDK is listed as a dependency in the pom.xml and will be downloaded automatically.
 
 ## A Note on Logging
 For logging, this SDK uses the [slf4j API](https://www.slf4j.org/) with a log4j2-slf4j binding. The logging configurations 
@@ -156,7 +156,7 @@ The sample class CombinePDF combines multiple PDF files into a single PDF file. 
 of the source files.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.combine.CombinePDF 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.combinepdf.CombinePDF 
 ```
 
 #### Combine Specific Pages of Multiple PDF Files
@@ -164,29 +164,126 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.c
 The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into into a single PDF file.
  
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.combine.CombinePDFWithPageRanges 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.combinepdf.CombinePDFWithPageRanges 
 ```
 
-### OCR PDF file
+### OCR PDF File
 
-These samples illustrates how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
+These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
 
-#### Convert PDF File to a searchable PDF file.
+#### Convert a PDF File into a Searchable PDF File
 
-The sample project OcrPDF converts a PDF file into a searchable PDF file.
+The sample class OcrPDF converts a PDF file into a searchable PDF file.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.ocr.OcrPDF
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.ocrpdf.OcrPDF
 ```
 
-#### Convert PDF file into a searchable file while keeping the original image.
+#### Convert a PDF File into a Searchable PDF File while keeping the original image
 
-The sample project OcrPDFWithOptions converts a PDF file to a searchable PDF file with maximum fidelity to the original 
+The sample class OcrPDFWithOptions converts a PDF file to a searchable PDF file with maximum fidelity to the original 
 image and default en-us locale. Refer to the documentation of OCRSupportedLocale and OCRSupportedType to see 
 the list of supported OCR locales and OCR types.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.ocr.OcrPDFWithOptions
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.ocrpdf.OcrPDFWithOptions
+```
+
+### Compress PDF File
+
+The sample illustrates how to reduce the size of a PDF file.
+
+#### Reduce PDF File Size
+
+The sample class CompressPDF reduces the size of a PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.compresspdf.CompressPDF
+```
+
+### Linearize PDF File
+
+The sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file. Such PDF files are 
+optimized for incremental access in network environments.
+
+#### Convert a PDF File into a Web Optimized File
+
+The sample class LinearizePDF optimizes the PDF file for a faster Web View.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.linearizepdf.LinearizePDF
+```
+
+### Protect PDF File
+
+The sample illustrates how to secure a PDF file with a password.
+
+#### Convert a PDF File into a Password Protected PDF File
+
+The sample class ProtectPDF converts a PDF file into a password protected PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.protectpdf.ProtectPDF
+```
+
+### Rotate Pages
+
+The sample illustrates how to rotate pages in a PDF file.
+
+#### Rotate Pages in PDF File
+
+The sample class RotatePDFPages rotates specific pages in a PDF file.  
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.rotatepages.RotatePDFPages
+```
+
+### Delete Pages
+
+The sample illustrates how to delete pages in a PDF file.
+
+#### Delete Pages from PDF File
+
+The sample class DeletePDFPages removes specific pages from a PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.deletepages.DeletePDFPages
+```
+
+### Reorder Pages
+
+The sample illustrates how to reorder the pages in a PDF file.
+
+#### Reorder Pages in PDF File
+
+The sample class ReorderPDFPages rearranges the pages of a PDF file according to the specified order.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.reorderpages.ReorderPDFPages
+```
+
+### Insert Pages
+
+The sample illustrates how to insert pages in a PDF file.
+
+#### Insert Pages into a PDF File
+
+The sample class InsertPDFPages inserts pages of multiple PDF files into a base PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.insertpages.InsertPDFPages
+```
+
+### Replace Pages
+
+The sample illustrates how to replace pages of a PDF file.
+
+#### Replace PDF File Pages with Multiple PDF Files
+
+The sample class ReplacePDFPages replaces specific pages in a PDF file with pages from multiple PDF files.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.replacepages.ReplacePDFPages
 ```
 
 ### Licensing

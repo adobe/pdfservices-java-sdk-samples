@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-package com.adobe.platform.operation.samples.ocr;
+package com.adobe.platform.operation.samples.ocrpdf;
 
 import java.io.IOException;
 
@@ -23,18 +23,23 @@ import com.adobe.platform.operation.exception.ServiceApiException;
 import com.adobe.platform.operation.exception.ServiceUsageException;
 import com.adobe.platform.operation.io.FileRef;
 import com.adobe.platform.operation.pdfops.OCROperation;
+import com.adobe.platform.operation.pdfops.options.ocr.OCROptions;
+import com.adobe.platform.operation.pdfops.options.ocr.OCRSupportedLocale;
+import com.adobe.platform.operation.pdfops.options.ocr.OCRSupportedType;
 
 /**
- * This sample illustrates how to perform OCR operation on a PDF file and convert it into a searchable PDF file.
+ * This sample illustrates how to perform an OCR operation on a PDF file and convert it into an searchable PDF file on
+ * the basis of provided locale and SEARCHABLE_IMAGE_EXACT ocr type to keep the original image
+ * (Recommended for cases requiring maximum fidelity to the original image.).
  * <p>
  * Note that OCR operation on a PDF file results in a PDF file.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-public class OcrPDF {
+public class OcrPDFWithOptions {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(OcrPDF.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OcrPDFWithOptions.class);
 
     public static void main(String[] args) {
 
@@ -42,7 +47,7 @@ public class OcrPDF {
 
             // Initial setup, create credentials instance.
             Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("dc-services-sdk-credentials.json")
+                    .fromFile("pdftools-api-credentials.json")
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
@@ -53,11 +58,18 @@ public class OcrPDF {
             FileRef source = FileRef.createFromLocalFile("src/main/resources/ocrInput.pdf");
             ocrOperation.setInput(source);
 
+            // Build OCR options from supported locales and OCR-types and set them into the operation
+            OCROptions ocrOptions = OCROptions.ocrOptionsBuilder()
+                    .withOCRLocale(OCRSupportedLocale.EN_US)
+                    .withOCRType(OCRSupportedType.SEARCHABLE_IMAGE_EXACT)
+                    .build();
+            ocrOperation.setOptions(ocrOptions);
+
             // Execute the operation
             FileRef result = ocrOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs("output/ocrOutput.pdf");
+            result.saveAs("output/ocrWithOptionsOutput.pdf");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);

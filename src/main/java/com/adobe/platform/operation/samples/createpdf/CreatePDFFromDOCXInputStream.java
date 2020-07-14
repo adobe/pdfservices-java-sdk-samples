@@ -42,7 +42,7 @@ public class CreatePDFFromDOCXInputStream {
 
             // Initial setup, create credentials instance.
             Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("dc-services-sdk-credentials.json")
+                    .fromFile("pdftools-api-credentials.json")
                     .build();
             //Create an ExecutionContext using credentials and create a new operation instance.
             ExecutionContext executionContext = ExecutionContext.create(credentials);
