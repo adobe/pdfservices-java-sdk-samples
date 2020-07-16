@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-package com.adobe.platform.operation.samples.combine;
+package com.adobe.platform.operation.samples.combinepdf;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ import com.adobe.platform.operation.pdfops.options.PageRanges;
 /**
  * This sample illustrates how to combine specific pages of multiple PDF files into a single PDF file.
  * <p>
- * Note that the SDK supports combining upto 12 files in one operation
+ * Note that the SDK supports combining upto 20 files in one operation
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
@@ -43,7 +43,7 @@ public class CombinePDFWithPageRanges {
 
             // Initial setup, create credentials instance.
             Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("dc-services-sdk-credentials.json")
+                    .fromFile("pdftools-api-credentials.json")
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.

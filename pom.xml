@@ -5,26 +5,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.adobe.documentcloud</groupId>
-  <artifactId>dc-services-sdk-samples</artifactId>
-  <version>${dc.services.sdk.samples.version}</version>
+  <groupId>com.adobe.documentservices</groupId>
+  <artifactId>pdftools-sdk-samples</artifactId>
+  <version>${pdftools.sdk.samples.version}</version>
 
-  <name>DC Services Java SDK Samples</name>
+  <name>PDF Tools Java SDK Samples</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <dc.services.sdk.version>1.0.0</dc.services.sdk.version>
-    <dc.services.sdk.samples.version>1.0.0</dc.services.sdk.samples.version>
+    <pdftools.sdk.version>1.1.0</pdftools.sdk.version>
+    <pdftools.sdk.samples.version>1.1.0</pdftools.sdk.samples.version>
   </properties>
 
   <dependencies>
 
     <dependency>
-      <groupId>com.adobe.documentcloud</groupId>
-      <artifactId>dc-services-sdk</artifactId>
-      <version>${dc.services.sdk.version}</version>
+      <groupId>com.adobe.documentservices</groupId>
+      <artifactId>pdftools-sdk</artifactId>
+      <version>${pdftools.sdk.version}</version>
     </dependency>
 
     <!--		log4j2 dependency to showcase the use of log4j2 with slf4j API-->
