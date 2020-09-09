@@ -1,0 +1,11 @@
+com.adobe.platform.operation
+com.adobe.platform.operation.auth
+com.adobe.platform.operation.exception
+com.adobe.platform.operation.io
+com.adobe.platform.operation.pdfops
+com.adobe.platform.operation.pdfops.options
+com.adobe.platform.operation.pdfops.options.createpdf
+com.adobe.platform.operation.pdfops.options.exportpdf
+com.adobe.platform.operation.pdfops.options.ocr
+com.adobe.platform.operation.pdfops.options.protectpdf
+com.adobe.platform.operation.pdfops.options.rotatepages
