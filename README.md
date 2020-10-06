@@ -169,7 +169,8 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.c
 
 ### OCR PDF File
 
-These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. The supported input format is application/pdf.
+These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. 
+The supported input format is application/pdf.
 
 #### Convert a PDF File into a Searchable PDF File
 
@@ -216,7 +217,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.l
 
 ### Protect PDF File
 
-The sample illustrates how to secure a PDF file with a password.
+These samples illustrate how to secure a PDF file with a password.
 
 #### Convert a PDF File into a Password Protected PDF File
 
@@ -224,6 +225,26 @@ The sample class ProtectPDF converts a PDF file into a password protected PDF fi
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.protectpdf.ProtectPDF
+```
+
+#### Protect a PDF File with an Owner Password and Permissions
+
+The sample class ProtectPDFWithOwnerPassword secures an input PDF file with owner password and allows certain access permissions such as copying and editing the contents, and printing of the document at low resolution.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.protectpdf.ProtectPDFWithOwnerPassword
+```
+
+### Remove Protection
+
+The sample illustrates how to remove a password security from a PDF document.
+
+#### Remove Protection from a PDF File
+
+The sample class RemoveProtection removes a password security from a secured PDF document.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.removeprotection.RemoveProtection
 ```
 
 ### Rotate Pages
@@ -284,6 +305,36 @@ The sample class ReplacePDFPages replaces specific pages in a PDF file with page
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.replacepages.ReplacePDFPages
+```
+
+### Split PDF File
+These samples illustrate how to split PDF file into multiple PDF files.
+
+#### Split PDF By Number of Pages
+
+The sample class SplitPDFByNumberOfPages splits input PDF into multiple PDF files on the basis of the maximum number
+of pages each of the output files can have.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.splitpdf.SplitPDFByNumberOfPages 
+```
+
+#### Split PDF Into Number of PDF Files
+
+The sample class SplitPDFIntoNumberOfFiles splits input PDF into multiple PDF files on the basis of the number
+of documents.
+ 
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.splitpdf.SplitPDFIntoNumberOfFiles 
+```
+
+#### Split PDF By Page Ranges
+
+The sample class SplitPDFByPageRanges splits input PDF into multiple PDF files on the basis of page ranges.
+Each page range corresponds to a single output file having the pages specified in the page range.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.splitpdf.SplitPDFByPageRanges 
 ```
 
 ### Licensing
