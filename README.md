@@ -214,7 +214,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.c
 ####  Reduce PDF File Size on the basis of Compression Level 
 
 The sample class CompressPDFWithOptions reduces the size of a PDF file on the basis of provided compression level.
-Refer to the documentation of CompressPDFOptions to see the list of supported compression levels.
+Refer to the documentation of CompressionLevel to see the list of supported compression levels.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.compresspdf.CompressPDFWithOptions 
