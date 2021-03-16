@@ -15,8 +15,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <pdftools.sdk.version>1.2.0</pdftools.sdk.version>
-    <pdftools.sdk.samples.version>1.2.0</pdftools.sdk.samples.version>
+    <pdftools.sdk.version>1.3.0</pdftools.sdk.version>
+    <pdftools.sdk.samples.version>1.3.0</pdftools.sdk.samples.version>
   </properties>
 
   <dependencies>

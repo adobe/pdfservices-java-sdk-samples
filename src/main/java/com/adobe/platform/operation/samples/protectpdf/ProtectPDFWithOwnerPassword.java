@@ -30,7 +30,7 @@ import com.adobe.platform.operation.pdfops.options.protectpdf.Permissions;
 import com.adobe.platform.operation.pdfops.options.protectpdf.ProtectPDFOptions;
 
 /**
- * This sample illustrates how to secure a PDF file with owner password and allow certain access permissions 
+ * This sample illustrates how to secure a PDF file with owner password and allow certain access permissions
  * such as copying and editing the contents, and printing of the document at low resolution.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
