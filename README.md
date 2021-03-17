@@ -61,6 +61,15 @@ The sample class CreatePDFFromDOCX creates a PDF file from a DOCX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromDOCX 
 ```
 
+####  Create a PDF File From a DOCX File with options 
+
+The sample class CreatePDFFromDOCXWithOptions creates a PDF file from a DOCX file by setting documentLanguage as
+the language of input file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.createpdf.CreatePDFFromDOCXWithOptions 
+```
+
 ####  Create a PDF File From a DOCX Input Stream
 
 The sample class CreatePDFFromDOCXInputStream creates a PDF file from a DOCX input stream.
@@ -192,7 +201,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.o
 
 ### Compress PDF File
 
-The sample illustrates how to reduce the size of a PDF file.
+These samples illustrate how to reduce the size of a PDF file.
 
 #### Reduce PDF File Size
 
@@ -200,6 +209,15 @@ The sample class CompressPDF reduces the size of a PDF file.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.compresspdf.CompressPDF
+```
+
+####  Reduce PDF File Size on the basis of Compression Level 
+
+The sample class CompressPDFWithOptions reduces the size of a PDF file on the basis of provided compression level.
+Refer to the documentation of CompressionLevel to see the list of supported compression levels.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.compresspdf.CompressPDFWithOptions 
 ```
 
 ### Linearize PDF File
@@ -229,7 +247,8 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.p
 
 #### Protect a PDF File with an Owner Password and Permissions
 
-The sample class ProtectPDFWithOwnerPassword secures an input PDF file with owner password and allows certain access permissions such as copying and editing the contents, and printing of the document at low resolution.
+The sample class ProtectPDFWithOwnerPassword secures an input PDF file with owner password and allows certain access permissions 
+such as copying and editing the contents, and printing of the document at low resolution.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.protectpdf.ProtectPDFWithOwnerPassword
@@ -335,6 +354,31 @@ Each page range corresponds to a single output file having the pages specified i
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.splitpdf.SplitPDFByPageRanges 
+```
+
+### Document Merge
+
+Adobe Document Merge Operation allows you to produce high fidelity PDF and Word documents with dynamic data inputs.
+Using this operation, you can merge your JSON data with Word templates to create dynamic documents for 
+contracts and agreements, invoices, proposals, reports, forms, branded marketing documents and more.
+To know more about document generation and document templates, please checkout the [documentation](http://www.adobe.com/go/dcdocgen_overview_doc)
+
+#### Merge Document to DOCX
+
+The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data to generate 
+the output document in the DOCX format.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.documentmerge.MergeDocumentToDOCX 
+```
+
+#### Merge Document to PDF
+
+The sample class MergeDocumentToPDF merges the Word based document template with the input JSON data to generate
+the output document in the PDF format.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.platform.operation.samples.documentmerge.MergeDocumentToPDF 
 ```
 
 ### Licensing
