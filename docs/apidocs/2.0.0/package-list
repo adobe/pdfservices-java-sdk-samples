@@ -1,0 +1,16 @@
+com.adobe.pdfservices.operation
+com.adobe.pdfservices.operation.auth
+com.adobe.pdfservices.operation.exception
+com.adobe.pdfservices.operation.io
+com.adobe.pdfservices.operation.pdfops
+com.adobe.pdfservices.operation.pdfops.options
+com.adobe.pdfservices.operation.pdfops.options.compresspdf
+com.adobe.pdfservices.operation.pdfops.options.createpdf
+com.adobe.pdfservices.operation.pdfops.options.createpdf.excel
+com.adobe.pdfservices.operation.pdfops.options.createpdf.ppt
+com.adobe.pdfservices.operation.pdfops.options.createpdf.word
+com.adobe.pdfservices.operation.pdfops.options.documentmerge
+com.adobe.pdfservices.operation.pdfops.options.exportpdf
+com.adobe.pdfservices.operation.pdfops.options.ocr
+com.adobe.pdfservices.operation.pdfops.options.protectpdf
+com.adobe.pdfservices.operation.pdfops.options.rotatepages
