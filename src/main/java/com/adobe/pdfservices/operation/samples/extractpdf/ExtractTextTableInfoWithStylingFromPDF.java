@@ -60,7 +60,7 @@ public class ExtractTextTableInfoWithStylingFromPDF {
             FileRef result = extractPDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs("output/extractPdfOutput.zip");
+            result.saveAs("output/ExtractTextTableInfoWithStylingFromPDF.zip");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
