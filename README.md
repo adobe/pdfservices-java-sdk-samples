@@ -105,6 +105,22 @@ Please refer the documentation of CreatePDFOperation.java to see instructions on
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromStaticHTML 
 ```
 
+#### Create a PDF File From Static HTML file with inline CSS
+
+The sample class CreatePDFFromHTMLWithInlineCSS creates a PDF file from an input HTML file with inline CSS. 
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromHTMLWithInlineCSS 
+```
+
+#### Create a PDF File From HTML specified via URL
+
+The sample class CreatePDFFromURL creates a PDF file rom an HTML specified via URL.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromURL 
+```
+
 #### Create a PDF File From Dynamic HTML (via Zip Archive)
 
 The sample class CreatePDFFromDynamicHTML converts a zip file, containing the input HTML file and its resources, along 
@@ -154,6 +170,14 @@ containing the individual images.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToJPEG
+```
+
+#### Export a PDF File To a List of Images (JPEG)
+
+The sample class ExportPDFToJPEGList converts a PDF file's pages to a list of JPEG images.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToJPEGList
 ```
 
 ### Combine PDF Files
@@ -463,6 +487,26 @@ along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoWithStylingFromPDF
+```
+
+### Fetch PDF Properties
+
+These samples illustrate how to fetch properties of a PDF file in the JSON format.
+
+#### Fetch PDF Properties as a JSON File
+
+The sample class PDFPropertiesAsFile fetches the properties of an input PDF, as a JSON file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.PDFPropertiesAsFile 
+```
+
+#### Fetch PDF Properties as a JSON Object
+
+The sample class PDFPropertiesAsJSONObject fetches the properties of an input PDF, as a JSON Object.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.PDFPropertiesAsJSONObject 
 ```
 
 ### Licensing
