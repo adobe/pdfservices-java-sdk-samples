@@ -20,6 +20,7 @@ import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.CreatePDFOptions;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.PageLayout;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
