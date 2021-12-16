@@ -106,18 +106,9 @@ The sample class CreatePDFFromPPTX creates a PDF file from a PPTX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromPPTX
 ```
 
-#### Create a PDF File From Static HTML (via Zip Archive)
+#### Create a PDF File From a Static HTML file with inline CSS
 
-The sample class CreatePDFFromStaticHTML creates a PDF file from a zip file containing the input HTML file and its resources. 
-Please refer the documentation of CreatePDFOperation.java to see instructions on the structure of the zip file.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromStaticHTML 
-```
-
-#### Create a PDF File From Static HTML file with inline CSS
-
-The sample class CreatePDFFromHTMLWithInlineCSS creates a PDF file from an input HTML file with inline CSS. 
+The sample class CreatePDFFromHTMLWithInlineCSS creates a PDF file from an input HTML file with inline CSS.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromHTMLWithInlineCSS 
@@ -125,10 +116,19 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create a PDF File From HTML specified via URL
 
-The sample class CreatePDFFromURL creates a PDF file rom an HTML specified via URL.
+The sample class CreatePDFFromURL creates a PDF file from an HTML specified via URL.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromURL 
+```
+
+#### Create a PDF File From Static HTML (via Zip Archive)
+
+The sample class CreatePDFFromStaticHTML creates a PDF file from a zip file containing the input HTML file and its resources.
+Please refer the documentation of CreatePDFOperation.java to see instructions on the structure of the zip file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromStaticHTML 
 ```
 
 #### Create a PDF File From Dynamic HTML (via Zip Archive)
@@ -171,7 +171,8 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Export PDF To Other Formats
 These samples illustrate how to export PDF files to other formats. Refer to the documentation of ExportPDFOperation.java
-to see the list of supported export formats.
+to see the list of supported export formats. Please note that exporting PDF to images results in a zip archive. 
+To export PDF to a list of images refer to the documentation of ExportPDFToImagesOperation.java.
 
 #### Export a PDF File To a DOCX File 
 
@@ -192,7 +193,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Export a PDF File To a List of Images (JPEG)
 
-The sample class ExportPDFToJPEGList converts a PDF file's pages to a list of JPEG images.
+The sample class ExportPDFToJPEGList converts a PDF file's pages to a list of JPEG images. 
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToJPEGList
@@ -426,7 +427,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Merge Document to PDF
 
 The sample class MergeDocumentToPDF merges the Word based document template with the input JSON data to generate
-the output document in the PDF format.
+the output document in the PDF format. 
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToPDF 
@@ -515,7 +516,6 @@ along with renditions as described in [section](#extract-pdf).
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoWithStylingFromPDF
 ```
-
 ### Fetch PDF Properties
 
 These samples illustrate how to fetch properties of a PDF file in the JSON format.
@@ -534,6 +534,77 @@ The sample class PDFPropertiesAsJSONObject fetches the properties of an input PD
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.PDFPropertiesAsJSONObject 
+```
+
+### Autotag PDF
+
+These samples illustrate tagging a PDF and generating the tagged PDF of version 1.7 or 2.0 and an optional report
+which provides information related to tagging of the document. 
+
+***Note: This is a beta service. It is provided for evaluation and feedback purposes only.***
+
+#### Generates tagged PDF of version 1.7 from a PDF
+
+The sample class AutotagPDFWithV17 generates tagged PDF of version 1.7 from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17 
+```
+
+#### Generates tagged PDF of version 1.7 and a report from a PDF
+
+The sample class AutotagPDFWithV17AndReport generates tagged PDF of version 1.7 and a report from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReport 
+```
+
+#### Generates tagged PDF  of version 1.7 by shifting headings and a report from a PDF
+
+The sample class AutotagPDFWithV17AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReportAndShiftHeadings 
+```
+
+#### Generates tagged PDF of version 1.7 by shifting headings from a PDF
+
+The sample class AutotagPDFWithV17AndShiftHeadings generates tagged PDF of version 1.7 by shifting headings from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndShiftHeadings 
+```
+
+#### Generates tagged PDF of version 2.0 from a PDF
+
+The sample class AutotagPDFWithV20 generates tagged PDF of version 1.7 from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20
+```
+
+#### Generates tagged PDF of version 2.0 by shifting headings and a report from a PDF
+
+The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReportAndShiftHeadings 
+```
+
+#### Generates tagged PDF of version 2.0 and a report from a PDF
+
+The sample class AutotagPDFWithV20AndReport generates tagged PDF of version 2.0 and a report from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReport 
+```
+
+#### Generates tagged PDF of version 2.0 by shifting headings from a PDF
+
+The sample class AutotagPDFWithV20AndShiftHeadings generates tagged PDF of version 2.0 by shifting headings from a PDF.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndShiftHeadings 
 ```
 
 ### Licensing
