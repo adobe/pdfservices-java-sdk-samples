@@ -22,6 +22,16 @@ The SDK also supports providing the authentication credentials at runtime, witho
 refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
 know more.
 
+## Client Configurations
+
+The SDK supports setting up custom socket timeout or connect timeout for the API calls. Please
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-custom-value-for-timeouts) to
+know more.
+
+The SDK also supports setting up Proxy Server configurations which helps in successful API calls for network where all outgoing calls have to go through a proxy else, they are blocked. Please
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-proxy-server-settings) to
+know more.
+
 ## Quota Exhaustion
 
 If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their usage
@@ -149,6 +159,14 @@ The sample project CreatePDFWithCustomTimeouts highlights how to provide the cus
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithCustomTimeouts
+```
+
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings)
+
+The sample project CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithProxyServer
 ```
 
 ### Export PDF To Other Formats
@@ -395,6 +413,15 @@ the output document in the DOCX format.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToDOCX 
+```
+
+#### Merge Document to DOCX with Fragments
+
+The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data and fragments JSON to generate 
+the output document in the DOCX format.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToDOCXWithFragments 
 ```
 
 #### Merge Document to PDF
