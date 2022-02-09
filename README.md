@@ -538,9 +538,10 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Autotag PDF
 
-These samples illustrate autotagging a pdf and generating the tagged pdf of version 1.7 or 2.0 and an optional report 
-which contains the information about the tags the tagged document contains.This feature is in ***Beta***.
+These samples illustrate tagging a PDF and generating the tagged PDF of version 1.7 or 2.0 and an optional report
+which provides information related to tagging of the document.
 
+***Note: This is a beta service. It is provided for evaluation and feedback purposes only.***
 
 #### Generates tagged PDF of version 1.7 from a PDF
 
