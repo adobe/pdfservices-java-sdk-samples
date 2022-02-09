@@ -520,76 +520,61 @@ which provides information related to tagging of the document.
 
 The sample class AutotagPDFWithV17 generates tagged PDF of version 1.7 from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17 
 ```
-
 
 #### Generates tagged PDF of version 1.7 and a report from a PDF
 
 The sample class AutotagPDFWithV17AndReport generates tagged PDF of version 1.7 and a report from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReport 
 ```
-
 
 #### Generates tagged PDF  of version 1.7 by shifting headings and a report from a PDF
 
 The sample class AutotagPDFWithV17AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReportAndShiftHeadings 
 ```
-
 
 #### Generates tagged PDF of version 1.7 by shifting headings from a PDF
 
 The sample class AutotagPDFWithV17AndShiftHeadings generates tagged PDF of version 1.7 by shifting headings from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndShiftHeadings 
 ```
-
 
 #### Generates tagged PDF of version 2.0 from a PDF
 
 The sample class AutotagPDFWithV20 generates tagged PDF of version 2.0 from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20
 ```
-
 
 #### Generates tagged PDF of version 2.0 by shifting headings and a report from a PDF
 
 The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 2.0 by shifting headings and a report from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReportAndShiftHeadings 
 ```
-
 
 #### Generates tagged PDF of version 2.0 and a report from a PDF
 
 The sample class AutotagPDFWithV20AndReport generates tagged PDF of version 2.0 and a report from a PDF.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReport 
 ```
 
-
 #### Generates tagged PDF of version 2.0 by shifting headings from a PDF
 
 The sample class AutotagPDFWithV20AndShiftHeadings generates tagged PDF of version 2.0 by shifting headings from a PDF.
-
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndShiftHeadings 
