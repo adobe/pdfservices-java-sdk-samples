@@ -54,7 +54,7 @@ public class AutotagPDFWithV17 {
             autotagPDFOperation.setInputFile(source);
 
             //Extract the name of the input file to be used in saving output file with same name
-            String inputFileName = filename.substring(filename.lastIndexOf('/') + 1, filename.indexOf('.'));
+            String inputFileName = filename.substring(filename.lastIndexOf('/') + 1, filename.lastIndexOf('.'));
 
             // Build AutotagPDF options and set them into the operation
             AutotagPDFOptions autotagPDFOptions = AutotagPDFOptions.autotagPDFOptionsBuilder()
