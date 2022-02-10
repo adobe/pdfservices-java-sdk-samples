@@ -512,7 +512,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 ### Autotag PDF
 
 These samples illustrate tagging a PDF and generating the tagged PDF of version 1.7 or 2.0 and an optional report
-which provides information related to tagging of the document. 
+which provides information related to tagging of the document.
 
 ***Note: This is a beta service. It is provided for evaluation and feedback purposes only.***
 
@@ -550,7 +550,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Generates tagged PDF of version 2.0 from a PDF
 
-The sample class AutotagPDFWithV20 generates tagged PDF of version 1.7 from a PDF.
+The sample class AutotagPDFWithV20 generates tagged PDF of version 2.0 from a PDF.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20
@@ -558,7 +558,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Generates tagged PDF of version 2.0 by shifting headings and a report from a PDF
 
-The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
+The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 2.0 by shifting headings and a report from a PDF.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReportAndShiftHeadings 
