@@ -155,7 +155,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create a PDF File From a DOCX File (By providing custom value for timeouts)
 
-The sample project CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
+The sample class CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithCustomTimeouts
@@ -163,7 +163,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create a PDF File From a DOCX File (By providing Proxy Server settings)
 
-The sample project CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
+The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithProxyServer
