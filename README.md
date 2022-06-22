@@ -2,24 +2,24 @@
 
 This sample project helps you get started with the PDF Services Java SDK.
 
-The sample classes illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using 
+The sample classes illustrate how to perform PDF-related actions (such as converting to and from the PDF format) using
 the SDK. **Please note that the PDF Services Java SDK supports only server side use cases.**
 
 ## Prerequisites
 The sample application has the following requirements:
 * Java JDK : Version 8 or above.
-* Build Tool: The application requires Maven to be installed. Maven installation instructions can be found 
-[here](https://maven.apache.org/install.html).
+* Build Tool: The application requires Maven to be installed. Maven installation instructions can be found
+  [here](https://maven.apache.org/install.html).
 
 
 ## Authentication Setup
 
-The credentials file and corresponding private key file for the samples is ```pdfservices-api-credentials.json``` and ```private.key``` 
-respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at 
+The credentials file and corresponding private key file for the samples is ```pdfservices-api-credentials.json``` and ```private.key```
+respectively. Before the samples can be run, replace both the files with the ones present in the downloaded zip file at
 the end of creation of credentials via [Get Started](https://www.adobe.io/apis/documentcloud/dcsdk/gettingstarted.html?ref=getStartedWithServicesSdk) workflow.
 
 The SDK also supports providing the authentication credentials at runtime, without storing them in a config file. Please
-refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to
 know more.
 
 ## Client Configurations
@@ -47,23 +47,23 @@ mvn clean install
 Note that the PDF Services SDK is listed as a dependency in the pom.xml and will be downloaded automatically.
 
 ## A Note on Logging
-For logging, this SDK uses the [slf4j API](https://www.slf4j.org/) with a log4j2-slf4j binding. The logging configurations 
+For logging, this SDK uses the [slf4j API](https://www.slf4j.org/) with a log4j2-slf4j binding. The logging configurations
 are provided in ```src/main/resources/log4j2.properties```. Alternate bindings, if required, can be specified in pom.xml.
 
 ## Running the samples
 
-The following sub-sections describe how to run the samples. Prior to running the samples, check that the configuration 
+The following sub-sections describe how to run the samples. Prior to running the samples, check that the configuration
 file is set up as described above and that the project has been built.
 
-The code itself is in the ```com.adobe.pdfservices.operation.samples``` package under the ```src/main/java/``` folder. Test 
-files used by the samples can be found in ```src/main/resources/```. When executed, all samples create an ```output``` 
+The code itself is in the ```com.adobe.pdfservices.operation.samples``` package under the ```src/main/java/``` folder. Test
+files used by the samples can be found in ```src/main/resources/```. When executed, all samples create an ```output```
 child folder under the working directory to store their results.
 
 ### Create a PDF File
-These samples illustrate how to convert files of some formats to PDF. Refer the documentation of CreatePDFOperation.java 
+These samples illustrate how to convert files of some formats to PDF. Refer the documentation of CreatePDFOperation.java
 to see the list of all supported media types which can be converted to PDF.
 
-####  Create a PDF File From a DOCX File 
+####  Create a PDF File From a DOCX File
 
 The sample class CreatePDFFromDOCX creates a PDF file from a DOCX file.
 
@@ -71,7 +71,7 @@ The sample class CreatePDFFromDOCX creates a PDF file from a DOCX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromDOCX 
 ```
 
-####  Create a PDF File From a DOCX File with options 
+####  Create a PDF File From a DOCX File with options
 
 The sample class CreatePDFFromDOCXWithOptions creates a PDF file from a DOCX file by setting documentLanguage as
 the language of input file.
@@ -90,7 +90,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ####  Create a PDF File From a DOCX File (Write to an OutputStream)
 
-The sample class CreatePDFFromDOCXToOutputStream creates a PDF file from a DOCX file. Instead of saving the result to a 
+The sample class CreatePDFFromDOCXToOutputStream creates a PDF file from a DOCX file. Instead of saving the result to a
 local file, it writes the result to an output stream.
 
 ```$xslt
@@ -98,7 +98,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 ```
 
 
-####  Create a PDF File From a PPTX File 
+####  Create a PDF File From a PPTX File
 
 The sample class CreatePDFFromPPTX creates a PDF file from a PPTX file.
 
@@ -133,9 +133,9 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create a PDF File From Dynamic HTML (via Zip Archive)
 
-The sample class CreatePDFFromDynamicHTML converts a zip file, containing the input HTML file and its resources, along 
-with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM, 
-thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML 
+The sample class CreatePDFFromDynamicHTML converts a zip file, containing the input HTML file and its resources, along
+with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM,
+thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML
 dynamically and then, convert it into a PDF file.
 
 ```$xslt
@@ -145,10 +145,10 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
 
 The sample class ```CreatePDFWithInMemoryAuthCredentials``` highlights how to provide in-memory auth credentials
-for performing an operation. This enables the clients to fetch the credentials from a secret server during runtime, 
+for performing an operation. This enables the clients to fetch the credentials from a secret server during runtime,
 instead of storing them in a file.
 
-Before running the sample, authentication credentials need to be updated as per the instructions in the class. 
+Before running the sample, authentication credentials need to be updated as per the instructions in the class.
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithInMemoryAuthCredentials 
 ```
@@ -171,10 +171,10 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Export PDF To Other Formats
 These samples illustrate how to export PDF files to other formats. Refer to the documentation of ExportPDFOperation.java
-to see the list of supported export formats. Please note that exporting PDF to images results in a zip archive. 
+to see the list of supported export formats. Please note that exporting PDF to images results in a zip archive.
 To export PDF to a list of images refer to the documentation of ExportPDFToImagesOperation.java.
 
-#### Export a PDF File To a DOCX File 
+#### Export a PDF File To a DOCX File
 
 The sample class ExportPDFToDOCX converts a PDF file to a DOCX file.
 
@@ -184,7 +184,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Export a PDF File To an Image Format (JPEG)
 
-The sample class ExportPDFToJPEG converts a PDF file's pages to JPEG images. Note that the output is a zip archive 
+The sample class ExportPDFToJPEG converts a PDF file's pages to JPEG images. Note that the output is a zip archive
 containing the individual images.
 
 ```$xslt
@@ -193,7 +193,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Export a PDF File To a List of Images (JPEG)
 
-The sample class ExportPDFToJPEGList converts a PDF file's pages to a list of JPEG images. 
+The sample class ExportPDFToJPEGList converts a PDF file's pages to a list of JPEG images.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToJPEGList
@@ -214,14 +214,14 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Combine Specific Pages of Multiple PDF Files
 
 The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into into a single PDF file.
- 
+
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.combinepdf.CombinePDFWithPageRanges 
 ```
 
 ### OCR PDF File
 
-These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF. 
+These samples illustrate how to apply OCR(Optical Character Recognition) to a PDF file and convert it to a searchable copy of your PDF.
 The supported input format is application/pdf.
 
 #### Convert a PDF File into a Searchable PDF File
@@ -234,8 +234,8 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Convert a PDF File into a Searchable PDF File while keeping the original image
 
-The sample class OcrPDFWithOptions converts a PDF file to a searchable PDF file with maximum fidelity to the original 
-image and default en-us locale. Refer to the documentation of OCRSupportedLocale and OCRSupportedType to see 
+The sample class OcrPDFWithOptions converts a PDF file to a searchable PDF file with maximum fidelity to the original
+image and default en-us locale. Refer to the documentation of OCRSupportedLocale and OCRSupportedType to see
 the list of supported OCR locales and OCR types.
 
 ```$xslt
@@ -254,7 +254,7 @@ The sample class CompressPDF reduces the size of a PDF file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.compresspdf.CompressPDF
 ```
 
-####  Reduce PDF File Size on the basis of Compression Level 
+####  Reduce PDF File Size on the basis of Compression Level
 
 The sample class CompressPDFWithOptions reduces the size of a PDF file on the basis of provided compression level.
 Refer to the documentation of CompressionLevel to see the list of supported compression levels.
@@ -265,7 +265,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Linearize PDF File
 
-The sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file. Such PDF files are 
+The sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file. Such PDF files are
 optimized for incremental access in network environments.
 
 #### Convert a PDF File into a Web Optimized File
@@ -290,7 +290,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Protect a PDF File with an Owner Password and Permissions
 
-The sample class ProtectPDFWithOwnerPassword secures an input PDF file with owner password and allows certain access permissions 
+The sample class ProtectPDFWithOwnerPassword secures an input PDF file with owner password and allows certain access permissions
 such as copying and editing the contents, and printing of the document at low resolution.
 
 ```$xslt
@@ -315,7 +315,7 @@ The sample illustrates how to rotate pages in a PDF file.
 
 #### Rotate Pages in PDF File
 
-The sample class RotatePDFPages rotates specific pages in a PDF file.  
+The sample class RotatePDFPages rotates specific pages in a PDF file.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.rotatepages.RotatePDFPages
@@ -385,7 +385,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 The sample class SplitPDFIntoNumberOfFiles splits input PDF into multiple PDF files on the basis of the number
 of documents.
- 
+
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.splitpdf.SplitPDFIntoNumberOfFiles 
 ```
@@ -402,13 +402,13 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 ### Document Merge
 
 Adobe Document Merge Operation allows you to produce high fidelity PDF and Word documents with dynamic data inputs.
-Using this operation, you can merge your JSON data with Word templates to create dynamic documents for 
+Using this operation, you can merge your JSON data with Word templates to create dynamic documents for
 contracts and agreements, invoices, proposals, reports, forms, branded marketing documents and more.
 To know more about document generation and document templates, please checkout the [documentation](http://www.adobe.com/go/dcdocgen_overview_doc)
 
 #### Merge Document to DOCX
 
-The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data to generate 
+The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data to generate
 the output document in the DOCX format.
 
 ```$xslt
@@ -417,7 +417,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Merge Document to DOCX with Fragments
 
-The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data and fragments JSON to generate 
+The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data and fragments JSON to generate
 the output document in the DOCX format.
 
 ```$xslt
@@ -427,7 +427,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Merge Document to PDF
 
 The sample class MergeDocumentToPDF merges the Word based document template with the input JSON data to generate
-the output document in the PDF format. 
+the output document in the PDF format.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToPDF 
@@ -436,14 +436,14 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Extract PDF
 
-These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF. 
+These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF.
 The output of SDK extract operation is Zip package. The Zip package consists of following:
 
-* The structuredData.json file with the extracted content & PDF element structure. See the [JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchema.json). Please refer the [Styling JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchemaStylingInfo.json) for a description of the output when the styling option is enabled. 
-* A renditions folder(s) containing renditions for each element type selected as input. 
-  The folder name is either “tables” or “figures” depending on your specified element type. 
-  Each folder contains renditions with filenames that correspond to the element information in the JSON file. 
-  
+* The structuredData.json file with the extracted content & PDF element structure. See the [JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchema.json). Please refer the [Styling JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchemaStylingInfo.json) for a description of the output when the styling option is enabled.
+* A renditions folder(s) containing renditions for each element type selected as input.
+  The folder name is either “tables” or “figures” depending on your specified element type.
+  Each folder contains renditions with filenames that correspond to the element information in the JSON file.
+
 #### Extract Text Elements
 
 The sample class ExtractTextInfoFromPDF.java extracts text elements from PDF Document.
@@ -454,7 +454,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Extract Text, Table Elements
 
-The sample class ExtractTextTableInfoFromPDF extracts text, table elements from PDF Document. 
+The sample class ExtractTextTableInfoFromPDF extracts text, table elements from PDF Document.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoFromPDF
@@ -471,8 +471,8 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 ```
 #### Extract Text, Table Elements with Renditions of Figure, Table Elements
 
-The sample class ExtractTextTableInfoWithFiguresTablesRenditionsFromPDF extracts text, table elements along with figure 
-and table element's renditions from PDF Document. Note that the output is a zip containing the structured information 
+The sample class ExtractTextTableInfoWithFiguresTablesRenditionsFromPDF extracts text, table elements along with figure
+and table element's renditions from PDF Document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -480,7 +480,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 ```
 #### Extract Text Elements and bounding boxes for Characters present in text blocks
 
-The sample class ExtractTextInfoWithCharBoundsFromPDF extracts text elements and bounding boxes for characters present in text blocks. Note that the output is a zip containing the structured information 
+The sample class ExtractTextInfoWithCharBoundsFromPDF extracts text elements and bounding boxes for characters present in text blocks. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -489,18 +489,18 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Extract Text, Table Elements and bounding boxes for Characters present in text blocks with Renditions of Table Elements
 
-The sample class ExtractTextTableInfoWithCharBoundsFromPDF extracts text, table elements, bounding boxes for characters present in text blocks and 
-table element's renditions from PDF Document. Note that the output is a zip containing the structured information 
+The sample class ExtractTextTableInfoWithCharBoundsFromPDF extracts text, table elements, bounding boxes for characters present in text blocks and
+table element's renditions from PDF Document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoWithCharBoundsFromPDF
 ```
 
-#### Extract Text, Table Elements with Renditions and CSV's of Table Elements 
+#### Extract Text, Table Elements with Renditions and CSV's of Table Elements
 
-The sample class ExtractTextTableInfoWithTableStructureFromPdf extracts text, table elements, table structures as CSV and 
-table element's renditions from PDF Document. Note that the output is a zip containing the structured information 
+The sample class ExtractTextTableInfoWithTableStructureFromPdf extracts text, table elements, table structures as CSV and
+table element's renditions from PDF Document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -510,7 +510,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Extract Text, Table Elements with Styling information of text
 
 The sample class ExtractTextTableInfoWithStylingFromPDF extracts text and table elements along with the styling information of the text blocks.
-Note that the output is a zip containing the structured information 
+Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -538,73 +538,42 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Autotag PDF
 
-These samples illustrate tagging a PDF and generating the tagged PDF of version 1.7 or 2.0 and an optional report
-which provides information related to tagging of the document. 
+These samples illustrate autotagging a PDF and generating the tagged PDF and an optional report
+which contains the information about the tags the tagged document contains. This feature is in ***Beta***.
 
-***Note: This is a beta service. It is provided for evaluation and feedback purposes only.***
 
-#### Generates tagged PDF of version 1.7 from a PDF
+#### Generates tagged PDF from a PDF
 
-The sample class AutotagPDFWithV17 generates tagged PDF of version 1.7 from a PDF.
+The sample class AutotagPDF generates tagged PDF from a PDF.
+
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDF 
 ```
 
-#### Generates tagged PDF of version 1.7 and a report from a PDF
 
-The sample class AutotagPDFWithV17AndReport generates tagged PDF of version 1.7 and a report from a PDF.
+#### Generates tagged PDF along with a report and shift the headings in the output PDF file
+
+The sample class AutotagPDFWithOptions generates tagged PDF with a report and shift the headings in the output PDF file.
+
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReport 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithOptions 
 ```
 
-#### Generates tagged PDF  of version 1.7 by shifting headings and a report from a PDF
 
-The sample class AutotagPDFWithV17AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
+#### Generates tagged PDF by setting options with command line arguments
 
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReportAndShiftHeadings 
-```
+The sample class AutotagPDFParamaterised generates tagged PDF by setting options through command line arguments
 
-#### Generates tagged PDF of version 1.7 by shifting headings from a PDF
-
-The sample class AutotagPDFWithV17AndShiftHeadings generates tagged PDF of version 1.7 by shifting headings from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 2.0 from a PDF
-
-The sample class AutotagPDFWithV20 generates tagged PDF of version 1.7 from a PDF.
+Here is a sample list of command line arguments and their description: </br>
+--input &lt; input file path &gt; </br>
+--output &lt; output file path &gt; </br>
+--report { If this argument is present then the output will be generated with the report } </br>
+--shift_headings { If this argument is present then the headings will be shifted in the output PDF file } </br>
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20
-```
-
-#### Generates tagged PDF of version 2.0 by shifting headings and a report from a PDF
-
-The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReportAndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 2.0 and a report from a PDF
-
-The sample class AutotagPDFWithV20AndReport generates tagged PDF of version 2.0 and a report from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReport 
-```
-
-#### Generates tagged PDF of version 2.0 by shifting headings from a PDF
-
-The sample class AutotagPDFWithV20AndShiftHeadings generates tagged PDF of version 2.0 by shifting headings from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndShiftHeadings 
+ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFParamaterised -Dexec.args="--report --shift_headings --input src/main/resources/autotagPdfInput.pdf --output output/AutotagPDFParamaterised/"
 ```
 
 ### Licensing

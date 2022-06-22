@@ -7,7 +7,7 @@
 
   <groupId>com.adobe.documentservices</groupId>
   <artifactId>pdfservices-sdk-samples</artifactId>
-  <version>2.2.0-beta.1</version>
+  <version>${pdfservices.sdk.samples.version}</version>
 
   <name>PDF Services Java SDK Samples</name>
 
@@ -15,7 +15,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <pdfservices.sdk.version>2.2.0-beta.1</pdfservices.sdk.version>
+    <pdfservices.sdk.version>2.3.0-beta.1</pdfservices.sdk.version>
+    <pdfservices.sdk.samples.version>2.3.0-beta.1</pdfservices.sdk.samples.version>
   </properties>
 
   <dependencies>
@@ -31,7 +32,7 @@
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j-impl</artifactId>
-      <version>2.16.0</version>
+      <version>2.17.1</version>
     </dependency>
   </dependencies>
 
