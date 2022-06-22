@@ -155,7 +155,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create a PDF File From a DOCX File (By providing custom value for timeouts)
 
-The sample sample CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
+The sample project CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithCustomTimeouts
@@ -417,7 +417,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Merge Document to DOCX with Fragments
 
-The sample class MergeDocumentToDOCX merges the Word based document template with the input JSON data and fragments JSON to generate 
+The sample class MergeDocumentToDOCXWithFragments merges the Word based document template with the input JSON data and fragments JSON to generate 
 the output document in the DOCX format.
 
 ```$xslt
