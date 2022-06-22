@@ -538,73 +538,42 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Autotag PDF
 
-These samples illustrate tagging a PDF and generating the tagged PDF of version 1.7 or 2.0 and an optional report
-which provides information related to tagging of the document.
+These samples illustrate autotagging a PDF and generating the tagged PDF and an optional report 
+which contains the information about the tags the tagged document contains. This feature is in ***Beta***.
 
-***Note: This is a beta service. It is provided for evaluation and feedback purposes only.***
 
-#### Generates tagged PDF of version 1.7 from a PDF
+#### Generates tagged PDF from a PDF
 
-The sample class AutotagPDFWithV17 generates tagged PDF of version 1.7 from a PDF.
+The sample class AutotagPDF generates tagged PDF from a PDF.
+
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDF 
 ```
 
-#### Generates tagged PDF of version 1.7 and a report from a PDF
 
-The sample class AutotagPDFWithV17AndReport generates tagged PDF of version 1.7 and a report from a PDF.
+#### Generates tagged PDF along with a report and shift the headings in the output PDF file
+
+The sample class AutotagPDFWithOptions generates tagged PDF with a report and shift the headings in the output PDF file.
+
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReport 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithOptions 
 ```
 
-#### Generates tagged PDF  of version 1.7 by shifting headings and a report from a PDF
 
-The sample class AutotagPDFWithV17AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
+#### Generates tagged PDF by setting options with command line arguments
 
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReportAndShiftHeadings 
-```
+The sample class AutotagPDFParamaterised generates tagged PDF by setting options through command line arguments
 
-#### Generates tagged PDF of version 1.7 by shifting headings from a PDF
-
-The sample class AutotagPDFWithV17AndShiftHeadings generates tagged PDF of version 1.7 by shifting headings from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 2.0 from a PDF
-
-The sample class AutotagPDFWithV20 generates tagged PDF of version 2.0 from a PDF.
+Here is a sample list of command line arguments and their description: </br>
+--input &lt; input file path &gt; </br>
+--output &lt; output file path &gt; </br>
+--report { If this argument is present then the output will be generated with the report } </br>
+--shift_headings { If this argument is present then the headings will be shifted in the output PDF file } </br>
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20
-```
-
-#### Generates tagged PDF of version 2.0 by shifting headings and a report from a PDF
-
-The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 2.0 by shifting headings and a report from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReportAndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 2.0 and a report from a PDF
-
-The sample class AutotagPDFWithV20AndReport generates tagged PDF of version 2.0 and a report from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReport 
-```
-
-#### Generates tagged PDF of version 2.0 by shifting headings from a PDF
-
-The sample class AutotagPDFWithV20AndShiftHeadings generates tagged PDF of version 2.0 by shifting headings from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndShiftHeadings 
+ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFParamaterised -Dexec.args="--report --shift_headings --input src/main/resources/autotagPdfInput.pdf --output output/AutotagPDFParamaterised/"
 ```
 
 ### Licensing

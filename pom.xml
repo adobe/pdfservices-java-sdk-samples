@@ -15,8 +15,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <pdfservices.sdk.version>2.2.2</pdfservices.sdk.version>
-    <pdfservices.sdk.samples.version>2.2.2</pdfservices.sdk.samples.version>
+    <pdfservices.sdk.version>2.3.0-beta.1</pdfservices.sdk.version>
+    <pdfservices.sdk.samples.version>2.3.0-beta.1</pdfservices.sdk.samples.version>
   </properties>
 
   <dependencies>
@@ -34,7 +34,6 @@
       <artifactId>log4j-slf4j-impl</artifactId>
       <version>2.17.1</version>
     </dependency>
-
   </dependencies>
 
   <build>
