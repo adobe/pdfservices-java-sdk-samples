@@ -541,26 +541,21 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 These samples illustrate autotagging a PDF and generating the tagged PDF and an optional report 
 which contains the information about the tags the tagged document contains. This feature is in ***Beta***.
 
-
 #### Generates tagged PDF from a PDF
 
 The sample class AutotagPDF generates tagged PDF from a PDF.
-
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDF 
 ```
 
-
 #### Generates tagged PDF along with a report and shift the headings in the output PDF file
 
 The sample class AutotagPDFWithOptions generates tagged PDF with a report and shift the headings in the output PDF file.
 
-
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithOptions 
 ```
-
 
 #### Generates tagged PDF by setting options with command line arguments
 
