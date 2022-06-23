@@ -22,6 +22,16 @@ The SDK also supports providing the authentication credentials at runtime, witho
 refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
 know more.
 
+## Client Configurations
+
+The SDK supports setting up custom socket timeout or connect timeout for the API calls. Please
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-custom-value-for-timeouts) to
+know more.
+
+The SDK also supports setting up Proxy Server configurations which helps in successful API calls for network where all outgoing calls have to go through a proxy else, they are blocked. Please
+refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-proxy-server-settings) to
+know more.
+
 ## Quota Exhaustion
 
 If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their usage
@@ -149,6 +159,14 @@ The sample project CreatePDFWithCustomTimeouts highlights how to provide the cus
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithCustomTimeouts
+```
+
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings)
+
+The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithProxyServer
 ```
 
 ### Export PDF To Other Formats
@@ -397,6 +415,15 @@ the output document in the DOCX format.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToDOCX 
 ```
 
+#### Merge Document to DOCX with Fragments
+
+The sample class MergeDocumentToDOCXWithFragments merges the Word based document template with the input JSON data and fragments JSON to generate 
+the output document in the DOCX format.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToDOCXWithFragments 
+```
+
 #### Merge Document to PDF
 
 The sample class MergeDocumentToPDF merges the Word based document template with the input JSON data to generate
@@ -511,73 +538,37 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Autotag PDF
 
-These samples illustrate tagging a PDF and generating the tagged PDF of version 1.7 or 2.0 and an optional report
-which provides information related to tagging of the document.
+These samples illustrate autotagging a PDF and generating the tagged PDF and an optional report 
+which contains the information about the tags the tagged document contains. This feature is in ***Beta***.
 
-***Note: This is a beta service. It is provided for evaluation and feedback purposes only.***
+#### Generates tagged PDF from a PDF
 
-#### Generates tagged PDF of version 1.7 from a PDF
-
-The sample class AutotagPDFWithV17 generates tagged PDF of version 1.7 from a PDF.
+The sample class AutotagPDF generates tagged PDF from a PDF.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDF 
 ```
 
-#### Generates tagged PDF of version 1.7 and a report from a PDF
+#### Generates tagged PDF along with a report and shift the headings in the output PDF file
 
-The sample class AutotagPDFWithV17AndReport generates tagged PDF of version 1.7 and a report from a PDF.
+The sample class AutotagPDFWithOptions generates tagged PDF with a report and shift the headings in the output PDF file.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReport 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithOptions 
 ```
 
-#### Generates tagged PDF  of version 1.7 by shifting headings and a report from a PDF
+#### Generates tagged PDF by setting options with command line arguments
 
-The sample class AutotagPDFWithV17AndReportAndShiftHeadings generates tagged PDF of version 1.7 by shifting headings and a report from a PDF.
+The sample class AutotagPDFParamaterised generates tagged PDF by setting options through command line arguments
 
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndReportAndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 1.7 by shifting headings from a PDF
-
-The sample class AutotagPDFWithV17AndShiftHeadings generates tagged PDF of version 1.7 by shifting headings from a PDF.
+Here is a sample list of command line arguments and their description: </br>
+--input &lt; input file path &gt; </br>
+--output &lt; output file path &gt; </br>
+--report { If this argument is present then the output will be generated with the report } </br>
+--shift_headings { If this argument is present then the headings will be shifted in the output PDF file } </br>
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV17AndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 2.0 from a PDF
-
-The sample class AutotagPDFWithV20 generates tagged PDF of version 2.0 from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20
-```
-
-#### Generates tagged PDF of version 2.0 by shifting headings and a report from a PDF
-
-The sample class AutotagPDFWithV20AndReportAndShiftHeadings generates tagged PDF of version 2.0 by shifting headings and a report from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReportAndShiftHeadings 
-```
-
-#### Generates tagged PDF of version 2.0 and a report from a PDF
-
-The sample class AutotagPDFWithV20AndReport generates tagged PDF of version 2.0 and a report from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndReport 
-```
-
-#### Generates tagged PDF of version 2.0 by shifting headings from a PDF
-
-The sample class AutotagPDFWithV20AndShiftHeadings generates tagged PDF of version 2.0 by shifting headings from a PDF.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithV20AndShiftHeadings 
+ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFParamaterised -Dexec.args="--report --shift_headings --input src/main/resources/autotagPdfInput.pdf --output output/AutotagPDFParamaterised/"
 ```
 
 ### Licensing

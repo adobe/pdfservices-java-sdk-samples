@@ -51,7 +51,7 @@ public class CreatePDFFromURL {
             CreatePDFOperation htmlToPDFOperation = CreatePDFOperation.createNew();
 
             // Set operation input from a source file.
-            FileRef source = FileRef.createFromURL(new URL("https://www.adobe.io"));
+            FileRef source = FileRef.createFromURL(new URL("https://developer.adobe.com/document-services/docs/overview/"));
             htmlToPDFOperation.setInput(source);
 
             // Provide any custom configuration options for the operation.
