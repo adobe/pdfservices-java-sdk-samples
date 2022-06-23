@@ -7,7 +7,7 @@
 
   <groupId>com.adobe.documentservices</groupId>
   <artifactId>pdfservices-sdk-samples</artifactId>
-  <version>2.2.0-beta.1</version>
+  <version>2.3.0-beta.1</version>
 
   <name>PDF Services Java SDK Samples</name>
 
