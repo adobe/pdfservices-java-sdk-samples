@@ -433,6 +433,29 @@ the output document in the PDF format.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToPDF 
 ```
 
+### PDF Electronic Seal
+
+PDF Electronic Seal Operation generates the PDF document with digital signature. 
+Below samples illustrates how we can use PDF electronic seal operation of pdfservices SDK to get PDF with seal in the response.
+To know more about PDF Electronic Seal, refer to the [documentation](http://www.adobe.com/go/dceseal_overview_doc)
+
+#### Electronic Seal With All Appearance Options
+
+The sample class ESealWithAllAppearanceOptions takes all appearance options along with other required sealing parameters as the input to generate the
+PDF document with seal in the output.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.eseal.ESealWithAllAppearanceOptions 
+```
+
+#### Electronic Seal With Default Appearance Options
+
+The sample class ESealWithDefaultAppearanceOptions use default appearance options and takes required sealing parameters as the input to generate the
+PDF document with seal in the output.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.eseal.ESealWithDefaultAppearanceOptions 
+```
 
 ### Extract PDF
 
