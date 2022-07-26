@@ -442,7 +442,7 @@ To know more about PDF Electronic Seal, refer to the [documentation](http://www.
 #### Electronic Seal With All Appearance Options
 
 The sample class ESealWithAllAppearanceOptions takes all appearance options along with other required sealing parameters as the input to generate the
-PDF document with seal in the output.
+PDF document with seal as the output.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.eseal.ESealWithAllAppearanceOptions 
@@ -451,7 +451,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Electronic Seal With Default Appearance Options
 
 The sample class ESealWithDefaultAppearanceOptions use default appearance options and takes required sealing parameters as the input to generate the
-PDF document with seal in the output.
+PDF document with seal as the output.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.eseal.ESealWithDefaultAppearanceOptions 
