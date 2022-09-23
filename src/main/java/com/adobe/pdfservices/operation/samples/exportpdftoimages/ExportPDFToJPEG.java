@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-package com.adobe.pdfservices.operation.samples.exportpdf;
+package com.adobe.pdfservices.operation.samples.exportpdftoimages;
 
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.auth.Credentials;
@@ -30,10 +30,10 @@ import java.util.List;
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-public class ExportPDFToJPEGList {
+public class ExportPDFToJPEG {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExportPDFToJPEGList.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExportPDFToJPEG.class);
 
     public static void main(String[] args) {
         try {
@@ -48,8 +48,9 @@ public class ExportPDFToJPEGList {
             ExportPDFToImagesOperation exportPDFToImagesOperation = ExportPDFToImagesOperation.createNew(ExportPDFToImagesTargetFormat.JPEG);
 
             // Set operation input from a source file.
-            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImagesInput.pdf");
+            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImageInput.pdf");
             exportPDFToImagesOperation.setInput(sourceFileRef);
+
 
             // Execute the operation.
             List<FileRef> results = exportPDFToImagesOperation.execute(executionContext);

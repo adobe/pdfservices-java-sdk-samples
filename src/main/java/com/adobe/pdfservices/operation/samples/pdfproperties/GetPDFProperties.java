@@ -1,15 +1,3 @@
-package com.adobe.pdfservices.operation.samples.pdfproperties;
-
-import com.adobe.pdfservices.operation.ExecutionContext;
-import com.adobe.pdfservices.operation.auth.Credentials;
-import com.adobe.pdfservices.operation.exception.SdkException;
-import com.adobe.pdfservices.operation.exception.ServiceApiException;
-import com.adobe.pdfservices.operation.exception.ServiceUsageException;
-import com.adobe.pdfservices.operation.io.FileRef;
-import com.adobe.pdfservices.operation.pdfops.PDFPropertiesOperation;
-import com.adobe.pdfservices.operation.pdfops.options.pdfproperties.PDFPropertiesOptions;
-import org.json.JSONObject;
-import org.slf4j.Logger;
 /*
  * Copyright 2019 Adobe
  * All Rights Reserved.
@@ -20,19 +8,33 @@ import org.slf4j.Logger;
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
+
+package com.adobe.pdfservices.operation.samples.pdfproperties;
+
+import com.adobe.pdfservices.operation.ExecutionContext;
+import com.adobe.pdfservices.operation.auth.Credentials;
+import com.adobe.pdfservices.operation.exception.SdkException;
+import com.adobe.pdfservices.operation.exception.ServiceApiException;
+import com.adobe.pdfservices.operation.exception.ServiceUsageException;
+import com.adobe.pdfservices.operation.io.FileRef;
+import com.adobe.pdfservices.operation.io.pdfproperties.Font;
+import com.adobe.pdfservices.operation.io.pdfproperties.PDFProperties;
+import com.adobe.pdfservices.operation.pdfops.PDFPropertiesOperation;
+import com.adobe.pdfservices.operation.pdfops.options.pdfproperties.PDFPropertiesOptions;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 /**
- * This sample illustrates how to use PDF Properties Operation to fetch various properties of an input PDF File and return them as a JSON Object
+ * This sample illustrates how to retrieve properties of an input PDF file.
  *
  * Refer to README.md for instructions on how to run the samples.
  */
-public class PDFPropertiesAsJSONObject {
+public class GetPDFProperties {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(PDFPropertiesAsJSONObject.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetPDFProperties.class);
 
     public static void main(String[] args) {
 
@@ -57,9 +59,14 @@ public class PDFPropertiesAsJSONObject {
                     .build();
             pdfPropertiesOperation.setOptions(pdfPropertiesOptions);
 
-            // Execute the operation and return JSON Object
-            JSONObject result = pdfPropertiesOperation.execute(executionContext);
-            LOGGER.info("The resultant PDF Properties are: {}", result);
+            // Execute the operation pdf properties operation
+            PDFProperties result = pdfPropertiesOperation.execute(executionContext);
+            // get properties of the pdf
+            LOGGER.info("The Page level properties of the PDF: {}", result.getDocument().getPageCount());
+            LOGGER.info("The Fonts used in the PDF: ");
+            for(Font font: result.getDocument().getFonts()) {
+                LOGGER.info(font.getName());
+            }
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);

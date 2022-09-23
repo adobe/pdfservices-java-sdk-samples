@@ -17,7 +17,7 @@ import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.AutotagPDFOperation;
-import com.adobe.pdfservices.operation.pdfops.options.autotag.AutotagOutputFiles;
+import com.adobe.pdfservices.operation.io.autotag.AutotagOutputFiles;
 import com.adobe.pdfservices.operation.pdfops.options.autotag.AutotagPDFOptions;
 import org.slf4j.LoggerFactory;
 

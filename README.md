@@ -171,8 +171,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Export PDF To Other Formats
 These samples illustrate how to export PDF files to other formats. Refer to the documentation of ExportPDFOperation.java
-to see the list of supported export formats. Please note that exporting PDF to images results in a zip archive.
-To export PDF to a list of images refer to the documentation of ExportPDFToImagesOperation.java.
+and ExportPDFToImagesOperation.java for supported export formats.
 
 #### Export a PDF File To a DOCX File
 
@@ -182,21 +181,28 @@ The sample class ExportPDFToDOCX converts a PDF file to a DOCX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToDOCX
 ```
 
-#### Export a PDF File To an Image Format (JPEG)
+#### Export a PDF file to a DOCX file (apply OCR on the PDF file)
 
-The sample class ExportPDFToJPEG converts a PDF file's pages to JPEG images. Note that the output is a zip archive
-containing the individual images.
+The sample class ExportPDFToDOCXWithOCROption converts a PDF file to a DOCX file. OCR processing is also performed on the input PDF file to extract text from images in the document.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToJPEG
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToDOCXWithOCROption
 ```
 
-#### Export a PDF File To a List of Images (JPEG)
+#### Export a PDF File To an Image Format (JPEG)
 
-The sample class ExportPDFToJPEGList converts a PDF file's pages to a list of JPEG images.
+The sample class ExportPDFToJPEG converts a PDF file's pages to a list of JPEG images.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdf.ExportPDFToJPEGList
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdftoimages.ExportPDFToJPEG
+```
+
+#### Export a PDF File To a Zip of Images (JPEG)
+
+The sample class ExportPDFToJPEGZip converts a PDF file's pages to JPEG images. The resulting file is a ZIP archive containing one image per page of the source PDF file
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdftoimages.ExportPDFToJPEGZip
 ```
 
 ### Combine PDF Files
@@ -213,7 +219,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Combine Specific Pages of Multiple PDF Files
 
-The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into into a single PDF file.
+The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into a single PDF file.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.combinepdf.CombinePDFWithPageRanges 
@@ -433,6 +439,28 @@ the output document in the PDF format.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToPDF 
 ```
 
+### PDF Electronic Seal
+
+These samples illustrate how to apply Electronic Seal over PDF documents. PDF Electronic Seal Operation enables the clients to perform electronic seal over the PDF documents like
+agreements, invoices and more.
+To know more about PDF Electronic Seal, please see the [documentation](https://developer.adobe.com/document-services/docs/overview/pdf-electronic-seal-api/).
+
+#### Apply Electronic Seal
+
+The sample class ElectronicSeal uses the default appearance options to apply electronic seal over the PDF document.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSeal 
+```
+
+#### Electronic Seal With Custom Appearance Options
+
+The sample class ElectronicSealWithAppearanceOptions uses the custom appearance options to apply electronic seal over the PDF document.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSealWithAppearanceOptions 
+```
+
 
 ### Extract PDF
 
@@ -446,7 +474,7 @@ The output of SDK extract operation is Zip package. The Zip package consists of 
 
 #### Extract Text Elements
 
-The sample class ExtractTextInfoFromPDF.java extracts text elements from PDF Document.
+The sample class ExtractTextInfoFromPDF.java extracts text elements from PDF document.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextInfoFromPDF
@@ -454,7 +482,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Extract Text, Table Elements
 
-The sample class ExtractTextTableInfoFromPDF extracts text, table elements from PDF Document.
+The sample class ExtractTextTableInfoFromPDF extracts text, table elements from PDF document.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoFromPDF
@@ -463,7 +491,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Extract Text, Table Elements with Renditions of Table Elements
 
 The sample class ExtractTextTableInfoWithRenditionsFromPDF extracts text, table elements along with table renditions
-from PDF Document. Note that the output is a zip containing the structured information along with renditions as described
+from PDF document. Note that the output is a zip containing the structured information along with renditions as described
 in [section](#extract-pdf).
 
 ```$xslt
@@ -472,7 +500,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Extract Text, Table Elements with Renditions of Figure, Table Elements
 
 The sample class ExtractTextTableInfoWithFiguresTablesRenditionsFromPDF extracts text, table elements along with figure
-and table element's renditions from PDF Document. Note that the output is a zip containing the structured information
+and table element's renditions from PDF document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -490,7 +518,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Extract Text, Table Elements and bounding boxes for Characters present in text blocks with Renditions of Table Elements
 
 The sample class ExtractTextTableInfoWithCharBoundsFromPDF extracts text, table elements, bounding boxes for characters present in text blocks and
-table element's renditions from PDF Document. Note that the output is a zip containing the structured information
+table element's renditions from PDF document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -500,7 +528,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 #### Extract Text, Table Elements with Renditions and CSV's of Table Elements
 
 The sample class ExtractTextTableInfoWithTableStructureFromPdf extracts text, table elements, table structures as CSV and
-table element's renditions from PDF Document. Note that the output is a zip containing the structured information
+table element's renditions from PDF document. Note that the output is a zip containing the structured information
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
@@ -517,24 +545,15 @@ along with renditions as described in [section](#extract-pdf).
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoWithStylingFromPDF
 ```
 
-### Fetch PDF Properties
+### PDF Properties
+This sample illustrates how to fetch properties of a PDF file
 
-These samples illustrate how to fetch properties of a PDF file in the JSON format.
+#### Fetch PDF Properties
 
-#### Fetch PDF Properties as a JSON File
-
-The sample class PDFPropertiesAsFile fetches the properties of an input PDF, as a JSON file.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.PDFPropertiesAsFile 
-```
-
-#### Fetch PDF Properties as a JSON Object
-
-The sample class PDFPropertiesAsJSONObject fetches the properties of an input PDF, as a JSON Object.
+The sample class GetPDFProperties fetches the properties of an input PDF.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.PDFPropertiesAsJSONObject 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.GetPDFProperties
 ```
 
 ### Autotag PDF

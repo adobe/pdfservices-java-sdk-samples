@@ -14,6 +14,8 @@ package com.adobe.pdfservices.operation.samples.exportpdf;
 import java.io.IOException;
 
 import com.adobe.pdfservices.operation.ExecutionContext;
+import com.adobe.pdfservices.operation.pdfops.options.exportpdf.ExportOCRLocale;
+import com.adobe.pdfservices.operation.pdfops.options.exportpdf.ExportPDFOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,18 +28,17 @@ import com.adobe.pdfservices.operation.pdfops.ExportPDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.exportpdf.ExportPDFTargetFormat;
 
 /**
- * This sample illustrates how to export a PDF file to JPEG.
- * <p>
- * Note that exporting a PDF file to an image format results in a ZIP archive containing one image per page.
+ * This sample illustrates how to export a PDF file to a Word (DOCX) file. The OCR processing is also performed on the input PDF file to extract text from images in the document.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-public class ExportPDFToJPEG {
+public class ExportPDFToDOCXWithOCROption {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExportPDFToJPEG.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExportPDFToDOCXWithOCROption.class);
 
     public static void main(String[] args) {
+
         try {
 
             // Initial setup, create credentials instance.
@@ -47,17 +48,21 @@ public class ExportPDFToJPEG {
 
             //Create an ExecutionContext using credentials and create a new operation instance.
             ExecutionContext executionContext = ExecutionContext.create(credentials);
-            ExportPDFOperation exportPdfOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.JPEG);
+            ExportPDFOperation exportPdfOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.DOCX);
 
             // Set operation input from a source file.
-            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImageInput.pdf");
+            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFInput.pdf");
             exportPdfOperation.setInput(sourceFileRef);
+
+            //Set export pdf ocr option
+            ExportPDFOptions exportPDFOptions = new ExportPDFOptions(ExportOCRLocale.EN_US);
+            exportPdfOperation.setOptions(exportPDFOptions);
 
             // Execute the operation.
             FileRef result = exportPdfOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/exportPDFToJPEG.zip");
+            result.saveAs("output/exportPdfOutputWithOCR.docx");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
