@@ -60,8 +60,7 @@ public class ExportPDFToJPEGZip {
             // Execute the operation.
             List<FileRef> results = exportPDFToImagesOperation.execute(executionContext);
 
-            //To obtain the media type of asset.
-            LOGGER.info("media type of the received asset is "+ results.get(0).getMediaType());
+            LOGGER.info("Media type of the received asset is "+ results.get(0).getMediaType());
 
             // Save the result to the specified location.
             results.get(0).saveAs("output/exportPDFToJPEGOutput.zip");
