@@ -51,20 +51,19 @@ public class ExportPDFToJPEGZip {
             ExportPDFToImagesOperation exportPDFToImagesOperation = ExportPDFToImagesOperation.createNew(ExportPDFToImagesTargetFormat.JPEG);
 
             // Set operation input from a source file.
-            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImagesInput.pdf");
+            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImageInput.pdf");
             exportPDFToImagesOperation.setInput(sourceFileRef);
 
-            // Set the output type to create zip of images
+            // Set the output type to create zip of images.
             exportPDFToImagesOperation.setOutputType(OutputType.ZIP_OF_PAGE_IMAGES);
 
             // Execute the operation.
             List<FileRef> results = exportPDFToImagesOperation.execute(executionContext);
 
-            //to obtain the media type of asset
-            LOGGER.info("media type of the received asset is "+results.get(0).getMediaType());
+            LOGGER.info("Media type of the received asset is "+ results.get(0).getMediaType());
 
             // Save the result to the specified location.
-            results.get(0).saveAs("output/exportPDFToJPEG.zip");
+            results.get(0).saveAs("output/exportPDFToJPEGOutput.zip");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);

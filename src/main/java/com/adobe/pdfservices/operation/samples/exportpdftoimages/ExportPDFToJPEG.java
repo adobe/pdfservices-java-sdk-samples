@@ -58,7 +58,7 @@ public class ExportPDFToJPEG {
             // Save the result to the specified location.
             int index = 0;
             for(FileRef result : results) {
-                result.saveAs("output/exportPDFToImagesOutput_" + index + ".jpeg");
+                result.saveAs("output/exportPDFToJPEGOutput_" + index + ".jpeg");
                 index++;
             }
 
