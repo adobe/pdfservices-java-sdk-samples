@@ -48,8 +48,9 @@ public class ExportPDFToJPEG {
             ExportPDFToImagesOperation exportPDFToImagesOperation = ExportPDFToImagesOperation.createNew(ExportPDFToImagesTargetFormat.JPEG);
 
             // Set operation input from a source file.
-            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImagesInput.pdf");
+            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImageInput.pdf");
             exportPDFToImagesOperation.setInput(sourceFileRef);
+
 
             // Execute the operation.
             List<FileRef> results = exportPDFToImagesOperation.execute(executionContext);

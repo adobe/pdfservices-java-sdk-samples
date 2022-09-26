@@ -219,7 +219,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Combine Specific Pages of Multiple PDF Files
 
-The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into into a single PDF file.
+The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into a single PDF file.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.combinepdf.CombinePDFWithPageRanges 
@@ -437,6 +437,28 @@ the output document in the PDF format.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.documentmerge.MergeDocumentToPDF 
+```
+
+### PDF Electronic Seal
+
+These samples illustrate how to apply Electronic Seal over PDF documents. PDF Electronic Seal Operation enables the clients to perform electronic seal over the PDF documents like
+agreements, invoices and more.
+To know more about PDF Electronic Seal, please see the [documentation](https://developer.adobe.com/document-services/docs/overview/pdf-electronic-seal-api/).
+
+#### Apply Electronic Seal
+
+The sample class ElectronicSeal uses the default appearance options to apply electronic seal over the PDF document.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSeal 
+```
+
+#### Electronic Seal With Custom Appearance Options
+
+The sample class ElectronicSealWithAppearanceOptions uses the custom appearance options to apply electronic seal over the PDF document.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSealWithAppearanceOptions 
 ```
 
 
