@@ -115,7 +115,7 @@ public class ElectronicSealWithAppearanceOptions {
             FileRef result = pdfElectronicSealOperation.execute(executionContext);
 
             //Save the output at specified location
-            result.saveAs("output/sealedOutputWithAllAppearanceOptions.pdf");
+            result.saveAs("output/sealedOutputWithAppearanceOptions.pdf");
 
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
