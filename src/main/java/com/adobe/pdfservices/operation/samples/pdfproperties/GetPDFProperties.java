@@ -59,10 +59,12 @@ public class GetPDFProperties {
                     .build();
             pdfPropertiesOperation.setOptions(pdfPropertiesOptions);
 
-            // Execute the operation pdf properties operation
+            // Execute the operation.
             PDFProperties result = pdfPropertiesOperation.execute(executionContext);
-            // get properties of the pdf
+
+            // Fetch the requisite properties of the specified PDF.
             LOGGER.info("The Page level properties of the PDF: {}", result.getDocument().getPageCount());
+
             LOGGER.info("The Fonts used in the PDF: ");
             for(Font font: result.getDocument().getFonts()) {
                 LOGGER.info(font.getName());

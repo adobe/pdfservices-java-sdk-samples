@@ -45,25 +45,24 @@ public class ExportPDFToDOCXWithOCROption {
                     .build();
             //Create an ExecutionContext using credentials and create a new operation instance.
             ExecutionContext executionContext = ExecutionContext.create(credentials);
-            ExportPDFOperation exportPdfOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.DOCX);
+            ExportPDFOperation exportPDFOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.DOCX);
 
             // Set operation input from a source file.
             FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFInput.pdf");
-            exportPdfOperation.setInput(sourceFileRef);
+            exportPDFOperation.setInput(sourceFileRef);
 
-            //Set export pdf ocr option
+            //Create a new ExportPDFOptions instance from the specified OCR locale and set it into the operation.
             ExportPDFOptions exportPDFOptions = new ExportPDFOptions(ExportOCRLocale.EN_US);
-            exportPdfOperation.setOptions(exportPDFOptions);
+            exportPDFOperation.setOptions(exportPDFOptions);
 
             // Execute the operation.
-            FileRef result = exportPdfOperation.execute(executionContext);
+            FileRef result = exportPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/exportPdfOutputWithOCR.docx");
+            result.saveAs("output/exportPDFWithOCROptionsOutput.docx");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }
-
 }
