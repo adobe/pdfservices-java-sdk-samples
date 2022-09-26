@@ -51,7 +51,7 @@ public class ExportPDFToJPEGZip {
             ExportPDFToImagesOperation exportPDFToImagesOperation = ExportPDFToImagesOperation.createNew(ExportPDFToImagesTargetFormat.JPEG);
 
             // Set operation input from a source file.
-            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImagesInput.pdf");
+            FileRef sourceFileRef = FileRef.createFromLocalFile("src/main/resources/exportPDFToImageInput.pdf");
             exportPDFToImagesOperation.setInput(sourceFileRef);
 
             // Set the output type to create zip of images.
