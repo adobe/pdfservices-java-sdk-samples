@@ -12,6 +12,8 @@
 package com.adobe.pdfservices.operation.samples.combinepdf;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +68,7 @@ public class CombinePDFWithPageRanges {
             FileRef result = combineFilesOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/combineFilesWithPageOptionsOutput.pdf");
+            result.saveAs( createOutputFileDirectoryPath("output/CombinePDFWithPageRanges","Combine","pdf"));
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
@@ -94,5 +96,12 @@ public class CombinePDFWithPageRanges {
         return pageRangesForFirstFile;
     }
 
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+    }
 
 }

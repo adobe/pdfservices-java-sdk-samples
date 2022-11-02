@@ -24,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This sample illustrates how to export a PDF file to a Word (DOCX) file. The OCR processing is also performed on the input PDF file to extract text from images in the document.
@@ -59,10 +61,19 @@ public class ExportPDFToDOCXWithOCROption {
             FileRef result = exportPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/exportPDFWithOCROptionsOutput.docx");
+            result.saveAs(createOutputFileDirectoryPath("output/ExportPDFToDOCXWithOCROption", "Export", "docx"));
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+    }
+
 }

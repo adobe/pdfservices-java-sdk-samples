@@ -22,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -59,13 +61,22 @@ public class SplitPDFByNumberOfPages {
             // Save the result to the specified location.
             int index = 0;
             for (FileRef fileRef : result) {
-                fileRef.saveAs("output/SplitPDFByNumberOfPagesOutput_" + index + ".pdf");
+                fileRef.saveAs(createOutputFileDirectoryPathWithIndex("output/SplitPDFByNumberOfPages",
+                        "Split", index, "pdf"));
                 index++;
             }
 
         } catch (IOException| ServiceApiException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
         }
+    }
+
+    //Generates a string containing a directory structure and indexed file name for the output file.
+    public static String createOutputFileDirectoryPathWithIndex(String directory, String name, int index, String format ){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return ( directory + "/" + name + "_" + timeStamp + "_" + index + "." + format);
     }
 
 }

@@ -12,6 +12,8 @@
 package com.adobe.pdfservices.operation.samples.removeprotection;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,10 +58,19 @@ public class RemoveProtection {
             FileRef result = removeProtectionOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/removeProtectionOutput.pdf");
+            result.saveAs(createOutputFileDirectoryPath("output/RemoveProtection", "RemoveProtection", "pdf"));
 
         } catch (IOException | ServiceApiException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+    }
+
 }

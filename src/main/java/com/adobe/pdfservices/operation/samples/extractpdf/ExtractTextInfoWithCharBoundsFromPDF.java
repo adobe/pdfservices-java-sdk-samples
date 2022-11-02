@@ -10,6 +10,9 @@
 package com.adobe.pdfservices.operation.samples.extractpdf;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.auth.Credentials;
 import com.adobe.pdfservices.operation.exception.SdkException;
@@ -59,10 +62,19 @@ public class ExtractTextInfoWithCharBoundsFromPDF {
             FileRef result = extractPDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs("output/ExtractTextInfoWithCharBoundsFromPDF.zip");
+            result.saveAs(createOutputFileDirectoryPath("output/ExtractTextInfoWithCharBoundsFromPDF", "Extract", "zip"));
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+    }
+
 }
