@@ -169,6 +169,14 @@ The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.misc.CreatePDFWithProxyServer
 ```
 
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings with authentication)
+
+The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server that requires authentication.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.misc.CreatePDFWithAuthenticatedProxyServer
+```
+
 ### Export PDF To Other Formats
 These samples illustrate how to export PDF files to other formats. Refer to the documentation of ExportPDFOperation.java
 and ExportPDFToImagesOperation.java for supported export formats.
