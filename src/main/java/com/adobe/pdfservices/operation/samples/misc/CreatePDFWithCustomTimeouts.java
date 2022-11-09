@@ -9,9 +9,14 @@
  * written permission of Adobe.
  */
 
-package com.adobe.pdfservices.operation.samples.createpdf;
+package com.adobe.pdfservices.operation.samples.misc;
+
+import java.io.IOException;
 
 import com.adobe.pdfservices.operation.ClientConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.auth.Credentials;
 import com.adobe.pdfservices.operation.exception.SdkException;
@@ -19,23 +24,18 @@ import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 /**
- * This sample illustrates how to setup Proxy Server configurations for performing an operation. This enables the
- * clients to set proxy server configurations to enable the API calls in a network where calls are blocked unless they
- * are routed via Proxy server.
+ * This sample illustrates how to provide custom http timeouts for performing an operation. This enables the
+ * clients to set custom timeouts on the basis of their network speed.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
 
-public class CreatePDFWithProxyServer {
+public class CreatePDFWithCustomTimeouts {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFWithProxyServer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFWithCustomTimeouts.class);
 
     public static void main(String[] args) {
 
@@ -46,19 +46,10 @@ public class CreatePDFWithProxyServer {
                     .fromFile("pdfservices-api-credentials.json")
                     .build();
 
-            /*
-            Initial setup, Create client config instance with proxy server configuration.
-            Replace the values of PROXY_HOSTNAME with the proxy server hostname.
-            If the scheme of proxy server is not HTTPS then, replace ProxyScheme parameter with HTTP.
-            If the port for proxy server is diff than the default port for HTTP and HTTPS, then please set the PROXY_PORT,
-                else, remove its setter statement.
-            */
+            // Create client config instance with custom time-outs.
             ClientConfig clientConfig = ClientConfig.builder()
                     .withConnectTimeout(10000)
                     .withSocketTimeout(40000)
-                    .withProxyScheme(ClientConfig.ProxyScheme.HTTPS) // Replace it with HTTP if the proxy server scheme is http
-                    .withProxyHost("PROXY_HOSTNAME")
-                    .withProxyPort(443)
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
@@ -73,7 +64,7 @@ public class CreatePDFWithProxyServer {
             FileRef result = createPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/createPDFWithProxyServer.pdf");
+            result.saveAs("output/createPDFWithCustomTimeouts.pdf");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);

@@ -150,7 +150,7 @@ instead of storing them in a file.
 
 Before running the sample, authentication credentials need to be updated as per the instructions in the class.
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithInMemoryAuthCredentials 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.misc.CreatePDFWithInMemoryAuthCredentials 
 ```
 
 #### Create a PDF File From a DOCX File (By providing custom value for timeouts)
@@ -158,7 +158,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 The sample class CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithCustomTimeouts
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.misc.CreatePDFWithCustomTimeouts
 ```
 
 #### Create a PDF File From a DOCX File (By providing Proxy Server settings)
@@ -166,7 +166,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithProxyServer
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.misc.CreatePDFWithProxyServer
 ```
 
 ### Export PDF To Other Formats

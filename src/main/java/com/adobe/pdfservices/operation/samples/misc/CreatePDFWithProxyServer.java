@@ -9,14 +9,9 @@
  * written permission of Adobe.
  */
 
-package com.adobe.pdfservices.operation.samples.createpdf;
-
-import java.io.IOException;
+package com.adobe.pdfservices.operation.samples.misc;
 
 import com.adobe.pdfservices.operation.ClientConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.auth.Credentials;
 import com.adobe.pdfservices.operation.exception.SdkException;
@@ -24,18 +19,25 @@ import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
+import com.adobe.pdfservices.operation.proxy.ProxyScheme;
+import com.adobe.pdfservices.operation.proxy.ProxyServerConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
- * This sample illustrates how to provide custom http timeouts for performing an operation. This enables the
- * clients to set custom timeouts on the basis of their network speed.
+ * This sample illustrates how to setup Proxy Server configurations for performing an operation. This enables the
+ * clients to set proxy server configurations to enable the API calls in a network where calls are blocked unless they
+ * are routed via Proxy server.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
 
-public class CreatePDFWithCustomTimeouts {
+public class CreatePDFWithProxyServer {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFWithCustomTimeouts.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFWithProxyServer.class);
 
     public static void main(String[] args) {
 
@@ -46,9 +48,22 @@ public class CreatePDFWithCustomTimeouts {
                     .fromFile("pdfservices-api-credentials.json")
                     .build();
 
-            // Create client config instance with custom time-outs.
+            /*
+            Initial setup, Create client config instance with proxy server configuration.
+            Replace the values of PROXY_HOSTNAME with the proxy server hostname.
+            If the scheme of proxy server is not HTTPS then, replace ProxyScheme parameter with HTTP.
+            If the port for proxy server is diff than the default port for HTTP and HTTPS, then please set the PROXY_PORT,
+                else, remove its setter statement.
+            */
+            ProxyServerConfig proxyServerConfig = new ProxyServerConfig.Builder()
+                    .withHost("PROXY_HOSTNAME")
+                    .withProxyScheme(ProxyScheme.HTTP) // Replace it with HTTPS if the proxy server scheme is https
+                    .withPort(3128)
+                    .build();
+
             ClientConfig clientConfig = ClientConfig.builder()
                     .withConnectTimeout(10000)
+                    .withProxyServerConfig(proxyServerConfig)
                     .withSocketTimeout(40000)
                     .build();
 
@@ -64,7 +79,7 @@ public class CreatePDFWithCustomTimeouts {
             FileRef result = createPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/createPDFWithCustomTimeouts.pdf");
+            result.saveAs("output/createPDFWithProxyServer.pdf");
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);

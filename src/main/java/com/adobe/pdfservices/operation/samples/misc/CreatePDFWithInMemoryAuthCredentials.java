@@ -9,7 +9,7 @@
  * written permission of Adobe.
  */
 
-package com.adobe.pdfservices.operation.samples.createpdf;
+package com.adobe.pdfservices.operation.samples.misc;
 
 import java.io.IOException;
 
