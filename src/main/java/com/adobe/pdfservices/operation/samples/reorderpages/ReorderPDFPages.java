@@ -59,7 +59,8 @@ public class ReorderPDFPages {
             FileRef result = reorderPagesOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs(createOutputFileDirectoryPath("output/ReorderPDFPages", "Reorder", "pdf"));
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (IOException | ServiceApiException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
@@ -79,11 +80,11 @@ public class ReorderPDFPages {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/ReorderPDFPages/reorder" + timeStamp + ".pdf");
     }
 
 }

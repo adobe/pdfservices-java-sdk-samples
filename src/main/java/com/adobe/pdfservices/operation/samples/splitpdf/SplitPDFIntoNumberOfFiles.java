@@ -58,10 +58,11 @@ public class SplitPDFIntoNumberOfFiles {
             List<FileRef> result = splitPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
+            String outputFilePath = createOutputFilePath();
             int index = 0;
             for (FileRef fileRef : result) {
-                fileRef.saveAs(createOutputFileDirectoryPathWithIndex("output/SplitPDFIntoNumberOfFiles",
-                        "Split", index, "pdf"));
+                String saveOutputFilePath = String.format(outputFilePath, String.valueOf(index));
+                fileRef.saveAs(saveOutputFilePath);
                 index++;
             }
 
@@ -71,11 +72,11 @@ public class SplitPDFIntoNumberOfFiles {
     }
 
     //Generates a string containing a directory structure and indexed file name for the output file.
-    public static String createOutputFileDirectoryPathWithIndex(String directory, String name, int index, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "_" + index + "." + format);
+        return ("output/SplitPDFIntoNumberOfFiles/split" + timeStamp + "_%s.pdf");
     }
 
 }

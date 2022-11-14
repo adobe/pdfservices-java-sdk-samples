@@ -61,7 +61,8 @@ public class ExportPDFToDOCXWithOCROption {
             FileRef result = exportPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs(createOutputFileDirectoryPath("output/ExportPDFToDOCXWithOCROption", "Export", "docx"));
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
@@ -69,11 +70,11 @@ public class ExportPDFToDOCXWithOCROption {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/ExportPDFToDOCXWithOCROption/export" + timeStamp + ".docx");
     }
 
 }

@@ -65,7 +65,8 @@ public class ExportPDFToJPEGZip {
             LOGGER.info("Media type of the received asset is "+ results.get(0).getMediaType());
 
             // Save the result to the specified location.
-            results.get(0).saveAs(createOutputFileDirectoryPath("output/ExportPDFToJPEGZip", "Export", "zip"));
+            String outputFilePath = createOutputFilePath();
+            results.get(0).saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
@@ -73,11 +74,11 @@ public class ExportPDFToJPEGZip {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/ExportPDFToJPEGZip/export" + timeStamp + ".zip");
     }
 
 }

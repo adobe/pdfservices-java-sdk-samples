@@ -57,9 +57,11 @@ public class ExportPDFToJPEG {
             List<FileRef> results = exportPDFToImagesOperation.execute(executionContext);
 
             // Save the result to the specified location.
+            String outputFilePath = createOutputFilePath();
             int index = 0;
             for(FileRef result : results) {
-                result.saveAs(createOutputFileDirectoryPathWithIndex("output/ExportPDFToJPEG", "Export", index, "jpeg"));
+                String saveOutputFilePath = String.format(outputFilePath, String.valueOf(index));
+                result.saveAs(saveOutputFilePath);
                 index++;
             }
 
@@ -69,11 +71,11 @@ public class ExportPDFToJPEG {
     }
 
     //Generates a string containing a directory structure and indexed file name for the output file.
-    public static String createOutputFileDirectoryPathWithIndex(String directory, String name, int index, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "_" + index + "." + format);
+        return ("output/ExportPDFToJPEG/export" + timeStamp + "_%s.jpeg");
     }
 
 }

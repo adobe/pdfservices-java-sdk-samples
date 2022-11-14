@@ -76,7 +76,8 @@ public class CreatePDFFromDOCXToOutputStream {
      * @return the OutputStream instance
      */
     private static FileOutputStream prepareOutputStream() throws FileNotFoundException {
-        File file = new File(createOutputFileDirectoryPath("output/CreatePDFFromDOCXToOutputStream", "Create", "pdf"));
+        String outputFilePath = createOutputFilePath();
+        File file = new File(outputFilePath);
 
         // Create the result directories if they don't exist.
         file.getParentFile().mkdirs();
@@ -85,11 +86,11 @@ public class CreatePDFFromDOCXToOutputStream {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/CreatePDFFromDOCXToOutputStream/create" + timeStamp + ".pdf");
     }
 
 }

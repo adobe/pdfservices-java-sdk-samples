@@ -54,7 +54,8 @@ public class CompressPDF {
             FileRef result = compressPDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs(createOutputFileDirectoryPath("output/CompressPDF", "Compress", "pdf"));
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
@@ -62,10 +63,10 @@ public class CompressPDF {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/CompressPDF/compress" + timeStamp + ".pdf");
     }
 }

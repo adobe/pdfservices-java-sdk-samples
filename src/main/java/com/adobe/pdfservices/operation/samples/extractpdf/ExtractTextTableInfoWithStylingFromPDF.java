@@ -62,8 +62,8 @@ public class ExtractTextTableInfoWithStylingFromPDF {
             FileRef result = extractPDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs(createOutputFileDirectoryPath("output/ExtractTextTableInfoWithStylingFromPDF",
-                    "Extract", "zip"));
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
@@ -71,11 +71,11 @@ public class ExtractTextTableInfoWithStylingFromPDF {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/ExtractTextTableInfoWithStylingFromPDF/extract" + timeStamp + ".zip");
     }
 
 }

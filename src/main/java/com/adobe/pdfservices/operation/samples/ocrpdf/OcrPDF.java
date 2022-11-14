@@ -59,7 +59,8 @@ public class OcrPDF {
             FileRef result = ocrOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs(createOutputFileDirectoryPath("output/OcrPDF", "OCR", "pdf"));
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
@@ -67,11 +68,11 @@ public class OcrPDF {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    public static String createOutputFileDirectoryPath(String directory, String name, String format ){
+    public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return ( directory + "/" + name + "_" + timeStamp + "." + format);
+        return("output/OcrPDF/ocr" + timeStamp + ".pdf");
     }
 
 }
