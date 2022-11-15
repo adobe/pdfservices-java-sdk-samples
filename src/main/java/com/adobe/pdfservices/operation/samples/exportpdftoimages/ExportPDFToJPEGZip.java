@@ -24,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -63,10 +65,20 @@ public class ExportPDFToJPEGZip {
             LOGGER.info("Media type of the received asset is "+ results.get(0).getMediaType());
 
             // Save the result to the specified location.
-            results.get(0).saveAs("output/exportPDFToJPEGOutput.zip");
+            String outputFilePath = createOutputFilePath();
+            results.get(0).saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/ExportPDFToJPEGZip/export" + timeStamp + ".zip");
+    }
+
 }

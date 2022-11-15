@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,12 +76,21 @@ public class CreatePDFFromDOCXToOutputStream {
      * @return the OutputStream instance
      */
     private static FileOutputStream prepareOutputStream() throws FileNotFoundException {
-        File file = new File("output/createPDFAsStream.pdf");
+        String outputFilePath = createOutputFilePath();
+        File file = new File(outputFilePath);
 
         // Create the result directories if they don't exist.
         file.getParentFile().mkdirs();
 
         return new FileOutputStream(file);
+    }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/CreatePDFFromDOCXToOutputStream/create" + timeStamp + ".pdf");
     }
 
 }

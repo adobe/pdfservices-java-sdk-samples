@@ -12,6 +12,8 @@
 package com.adobe.pdfservices.operation.samples.protectpdf;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,10 +79,20 @@ public class ProtectPDFWithOwnerPassword {
             FileRef result = protectPDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs("output/protectPDFWithOwnerPasswordOutput.pdf");
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/ProtectPDFWithOwnerPassword/protect" + timeStamp + ".pdf");
+    }
+
 }

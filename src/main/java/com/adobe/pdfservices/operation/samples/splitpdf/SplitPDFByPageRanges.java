@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -59,9 +61,11 @@ public class SplitPDFByPageRanges {
             List<FileRef> result = splitPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
+            String outputFilePath = createOutputFilePath();
             int index = 0;
             for (FileRef fileRef : result) {
-                fileRef.saveAs("output/SplitPDFByPageRangesOutput_" + index + ".pdf");
+                String saveOutputFilePath = String.format(outputFilePath, String.valueOf(index));
+                fileRef.saveAs(saveOutputFilePath);
                 index++;
             }
 
@@ -79,6 +83,14 @@ public class SplitPDFByPageRanges {
         // Add pages 3 to 4.
         pageRanges.addRange(3, 4);
         return pageRanges;
+    }
+
+    //Generates a string containing a directory structure and indexed file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return ("output/SplitPDFByPageRanges/split" + timeStamp + "_%s.pdf");
     }
 
 }

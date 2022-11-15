@@ -12,6 +12,8 @@
 package com.adobe.pdfservices.operation.samples.combinepdf;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.adobe.pdfservices.operation.ExecutionContext;
 import org.slf4j.Logger;
@@ -57,10 +59,20 @@ public class CombinePDF {
             FileRef result = combineFilesOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/combineFilesOutput.pdf");
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (IOException | ServiceApiException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/CombinePDF/combine" + timeStamp + ".pdf");
+    }
+
 }

@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This sample illustrates how to insert specific pages of multiple PDF files into a single PDF file.
@@ -68,7 +70,8 @@ public class InsertPDFPages {
             FileRef result = insertPagesOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/insertPagesOutput.pdf");
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (IOException | ServiceApiException | SdkException | ServiceUsageException e) {
             LOGGER.error("Exception encountered while executing operation", e);
@@ -85,6 +88,14 @@ public class InsertPDFPages {
         pageRanges.addSinglePage(4);
 
         return pageRanges;
+    }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/InsertPDFPages/insert" + timeStamp + ".pdf");
     }
 
 }

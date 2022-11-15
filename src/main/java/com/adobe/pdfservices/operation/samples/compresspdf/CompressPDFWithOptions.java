@@ -24,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This sample illustrates how to compress PDF by reducing the size of the PDF file on the basis of
@@ -63,10 +65,20 @@ public class CompressPDFWithOptions {
             FileRef result = compressPDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs("output/compressPDFWithOptionsOutput.pdf");
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
+
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
+    }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/CompressPDFWithOptions/compress" + timeStamp + ".pdf");
     }
 
 }

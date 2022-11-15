@@ -22,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This sample illustrates how to convert a PDF file into a Linearized (also known as "web optimized") PDF file.
@@ -53,10 +55,20 @@ public class LinearizePDF {
             FileRef result = linearizePDFOperation.execute(executionContext);
 
             // Save the result at the specified location
-            result.saveAs("output/linearizePDFOutput.pdf");
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/LinearizePDF/linearize" + timeStamp + ".pdf");
+    }
+
 }

@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This sample illustrates how to convert an HTML file specified via URL to a PDF file.
@@ -66,7 +68,8 @@ public class CreatePDFFromURL {
             FileRef result = htmlToPDFOperation.execute(executionContext);
 
             // Save the result to the specified location.
-            result.saveAs("output/createPDFFromURLOutput.pdf");
+            String outputFilePath = createOutputFilePath();
+            result.saveAs(outputFilePath);
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
@@ -90,4 +93,13 @@ public class CreatePDFFromURL {
                 .build();
         htmlToPDFOperation.setOptions(htmlToPdfOptions);
     }
+
+    //Generates a string containing a directory structure and file name for the output file.
+    public static String createOutputFilePath(){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timeStamp = dateTimeFormatter.format(now);
+        return("output/CreatePDFFromURL/create" + timeStamp + ".pdf");
+    }
+
 }
