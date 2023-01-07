@@ -32,6 +32,9 @@ The SDK also supports setting up Proxy Server configurations which helps in succ
 refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-proxy-server-settings) to
 know more.
 
+Additionally, SDK can be configured to process the documents in the specified region.
+Please refer this [section](#export-a-pdf-file-to-a-docx-file-by-providing-the-region) to know more.
+
 ## Quota Exhaustion
 
 If you receive ServiceUsageException during the Samples run, it means that trial credentials have exhausted their usage
@@ -140,33 +143,6 @@ dynamically and then, convert it into a PDF file.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromDynamicHTML 
-```
-
-#### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
-
-The sample class ```CreatePDFWithInMemoryAuthCredentials``` highlights how to provide in-memory auth credentials
-for performing an operation. This enables the clients to fetch the credentials from a secret server during runtime,
-instead of storing them in a file.
-
-Before running the sample, authentication credentials need to be updated as per the instructions in the class.
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithInMemoryAuthCredentials 
-```
-
-#### Create a PDF File From a DOCX File (By providing custom value for timeouts)
-
-The sample class CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithCustomTimeouts
-```
-
-#### Create a PDF File From a DOCX File (By providing Proxy Server settings)
-
-The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFWithProxyServer
 ```
 
 ### Export PDF To Other Formats
@@ -532,6 +508,45 @@ The sample class GetPDFProperties fetches the properties of an input PDF.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.GetPDFProperties
+```
+
+### Custom Client Configuration
+
+These samples illustrate how to provide a custom client configurations(timeouts, proxy etc) and in-memory authentication
+credentials.
+
+#### Create a PDF File From a DOCX File (By providing custom value for timeouts)
+
+The sample class CreatePDFWithCustomTimeouts highlights how to provide the custom value for connection timeout and socket timeout.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.CreatePDFWithCustomTimeouts
+```
+
+#### Create a PDF File From a DOCX File (By providing in-memory Authentication credentials)
+
+The sample class CreatePDFWithInMemoryAuthCredentials highlights how to provide in-memory auth credentials
+for performing an operation. This enables the client to fetch the credentials from a secret server during runtime,
+instead of storing them in a file.
+
+Before running the sample, authentication credentials need to be updated as per the instructions in the class.
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.CreatePDFWithInMemoryAuthCredentials 
+```
+
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings)
+
+The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.CreatePDFWithProxyServer
+```
+
+#### Export a PDF File to a DOCX File (By providing the region)
+
+The sample class ExportPDFWithSpecifiedRegion highlights how to configure the SDK to process the documents in the specified region.
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.ExportPDFWithSpecifiedRegion
 ```
 
 ### Licensing
