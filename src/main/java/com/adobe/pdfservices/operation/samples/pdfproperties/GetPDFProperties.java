@@ -63,12 +63,9 @@ public class GetPDFProperties {
             PDFProperties result = pdfPropertiesOperation.execute(executionContext);
 
             // Fetch the requisite properties of the specified PDF.
-            LOGGER.info("The Page level properties of the PDF: {}", result.getDocument().getPageCount());
-
-            LOGGER.info("The Fonts used in the PDF: ");
-            for(Font font: result.getDocument().getFonts()) {
-                LOGGER.info(font.getName());
-            }
+            LOGGER.info("Size of the specified PDF file: {}", result.getDocument().getFileSize());
+            LOGGER.info("Version of the specified PDF file: {}", result.getDocument().getPDFVersion());
+            LOGGER.info("Version of the specified PDF file: {}", result.getDocument().getPageCount());
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
