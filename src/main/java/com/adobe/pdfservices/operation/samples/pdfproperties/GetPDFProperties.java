@@ -17,7 +17,6 @@ import com.adobe.pdfservices.operation.exception.SdkException;
 import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
-import com.adobe.pdfservices.operation.io.pdfproperties.Font;
 import com.adobe.pdfservices.operation.io.pdfproperties.PDFProperties;
 import com.adobe.pdfservices.operation.pdfops.PDFPropertiesOperation;
 import com.adobe.pdfservices.operation.pdfops.options.pdfproperties.PDFPropertiesOptions;
@@ -60,15 +59,12 @@ public class GetPDFProperties {
             pdfPropertiesOperation.setOptions(pdfPropertiesOptions);
 
             // Execute the operation.
-            PDFProperties result = pdfPropertiesOperation.execute(executionContext);
+            PDFProperties pdfProperties = pdfPropertiesOperation.execute(executionContext);
 
             // Fetch the requisite properties of the specified PDF.
-            LOGGER.info("The Page level properties of the PDF: {}", result.getDocument().getPageCount());
-
-            LOGGER.info("The Fonts used in the PDF: ");
-            for(Font font: result.getDocument().getFonts()) {
-                LOGGER.info(font.getName());
-            }
+            LOGGER.info("Size of the specified PDF file: {}", pdfProperties.getDocument().getFileSize());
+            LOGGER.info("Version of the specified PDF file: {}", pdfProperties.getDocument().getPDFVersion());
+            LOGGER.info("Page count of the specified PDF file: {}", pdfProperties.getDocument().getPageCount());
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
