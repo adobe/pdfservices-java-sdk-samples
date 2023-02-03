@@ -60,12 +60,12 @@ public class GetPDFProperties {
             pdfPropertiesOperation.setOptions(pdfPropertiesOptions);
 
             // Execute the operation.
-            PDFProperties result = pdfPropertiesOperation.execute(executionContext);
+            PDFProperties pdfProperties = pdfPropertiesOperation.execute(executionContext);
 
             // Fetch the requisite properties of the specified PDF.
-            LOGGER.info("Size of the specified PDF file: {}", result.getDocument().getFileSize());
-            LOGGER.info("Version of the specified PDF file: {}", result.getDocument().getPDFVersion());
-            LOGGER.info("Version of the specified PDF file: {}", result.getDocument().getPageCount());
+            LOGGER.info("Size of the specified PDF file: {}", pdfProperties.getDocument().getFileSize());
+            LOGGER.info("Version of the specified PDF file: {}", pdfProperties.getDocument().getPDFVersion());
+            LOGGER.info("Page count of the specified PDF file: {}", pdfProperties.getDocument().getPageCount());
 
         } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
