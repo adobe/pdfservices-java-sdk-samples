@@ -17,7 +17,6 @@ import com.adobe.pdfservices.operation.exception.SdkException;
 import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
-import com.adobe.pdfservices.operation.io.pdfproperties.Font;
 import com.adobe.pdfservices.operation.io.pdfproperties.PDFProperties;
 import com.adobe.pdfservices.operation.pdfops.PDFPropertiesOperation;
 import com.adobe.pdfservices.operation.pdfops.options.pdfproperties.PDFPropertiesOptions;
