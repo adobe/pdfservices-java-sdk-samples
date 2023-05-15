@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe
+ * Copyright 2023 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -21,6 +21,7 @@ import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
 import com.adobe.pdfservices.operation.proxy.ProxyScheme;
 import com.adobe.pdfservices.operation.proxy.ProxyServerConfig;
+import com.adobe.pdfservices.operation.proxy.UsernamePasswordCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,17 +30,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This sample illustrates how to setup Proxy Server configurations for performing an operation. This enables the
+ * This sample illustrates how to set up authenticated Proxy Server configurations for performing an operation. This enables the
  * clients to set proxy server configurations to enable the API calls in a network where calls are blocked unless they
- * are routed via Proxy server.
+ * are routed via an authenticated Proxy server.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-
-public class CreatePDFWithProxyServer {
+public class CreatePDFWithAuthenticatedProxyServer {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFWithProxyServer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreatePDFWithAuthenticatedProxyServer.class);
 
     public static void main(String[] args) {
 
@@ -51,16 +51,18 @@ public class CreatePDFWithProxyServer {
                     .build();
 
             /*
-            Initial setup, Create proxy server config instance for client config
+            Initial setup, Create proxy server config instance for client config.
             Replace the values of PROXY_HOSTNAME with the proxy server hostname.
-            If the scheme of proxy server is not HTTPS then, replace ProxyScheme parameter with HTTP.
+            Replace the username and password with Proxy Server Authentication credentials.
+            If the scheme of proxy server is not HTTP then, replace ProxyScheme parameter with HTTPS.
             If the port for proxy server is diff than the default port for HTTP and HTTPS, then please set the PROXY_PORT,
             else, remove its setter statement.
-             */
+            */
             ProxyServerConfig proxyServerConfig = new ProxyServerConfig.Builder()
                     .withHost("PROXY_HOSTNAME")
                     .withProxyScheme(ProxyScheme.HTTP) // Replace it with HTTPS if the proxy server scheme is https
                     .withPort(443)
+                    .withCredentials(new UsernamePasswordCredentials("USERNAME", "PASSWORD"))
                     .build();
 
             // Create client config instance
@@ -95,6 +97,6 @@ public class CreatePDFWithProxyServer {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return("output/CreatePDFWithProxyServer/create" + timeStamp + ".pdf");
+        return("output/CreatePDFWithAuthenticatedProxyServer/create" + timeStamp + ".pdf");
     }
 }
