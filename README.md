@@ -542,11 +542,55 @@ The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.CreatePDFWithProxyServer
 ```
 
+#### Create a PDF File From a DOCX File (By providing Proxy Server settings with authentication)
+
+The sample class CreatePDFWithAuthenticatedProxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server that requires authentication.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.CreatePDFWithAuthenticatedProxyServer
+```
+
 #### Export a PDF File to a DOCX File (By providing the region)
 
 The sample class ExportPDFWithSpecifiedRegion highlights how to configure the SDK to process the documents in the specified region.
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.ExportPDFWithSpecifiedRegion
+```
+
+### Create Tagged PDF
+
+These samples illustrate how to create a PDF document with enhanced readability from existing PDF document. All tags from the input file will be removed except for existing alt-text images and a
+new tagged PDF will be created as output. However, the generated PDF is not guaranteed to comply with accessibility standards such as WCAG and PDF/UA as you may need to perform further downstream remediation to meet those standards.
+
+#### Create Tagged PDF from a PDF
+
+The sample project AutotagPDF highlights how to add tags to PDF document to make the PDF more accessible.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDF
+```
+
+### Create Tagged PDF from a PDF along with a report and shift the headings in the output PDF file
+
+The sample project AutotagPDFWithOptions highlights how to add tags to PDF documents to make the PDF more accessible and also shift the headings in the output PDF file.
+Also, it generates a tagging report which contains the information about the tags that the tagged output PDF document contains.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFWithOptions
+```
+
+#### Create Tagged PDF from a PDF by setting options with command line arguments
+
+The sample project AutotagPDFParamaterised highlights how to add tags to PDF documents to make the PDF more accessible by setting options through command line arguments.
+
+Here is a sample list of command line arguments and their description: </br>
+--input &lt; input file path &gt; </br>
+--output &lt; output file path &gt; </br>
+--report { If this argument is present then the output will be generated with the tagging report } </br>
+--shift_headings { If this argument is present then the headings will be shifted in the output PDF document } </br>
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFParameterised -Dexec.args="--report --shift_headings --input src/main/resources/autotagPDFInput.pdf --output output/AutotagPDFParamaterised/"
 ```
 
 ### Licensing

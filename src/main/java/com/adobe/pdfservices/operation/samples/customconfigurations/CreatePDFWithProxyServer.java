@@ -19,6 +19,8 @@ import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
+import com.adobe.pdfservices.operation.proxy.ProxyScheme;
+import com.adobe.pdfservices.operation.proxy.ProxyServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,18 +51,23 @@ public class CreatePDFWithProxyServer {
                     .build();
 
             /*
-            Initial setup, Create client config instance with proxy server configuration.
+            Initial setup, Create proxy server config instance for client config
             Replace the values of PROXY_HOSTNAME with the proxy server hostname.
             If the scheme of proxy server is not HTTPS then, replace ProxyScheme parameter with HTTP.
             If the port for proxy server is diff than the default port for HTTP and HTTPS, then please set the PROXY_PORT,
-                else, remove its setter statement.
-            */
+            else, remove its setter statement.
+             */
+            ProxyServerConfig proxyServerConfig = new ProxyServerConfig.Builder()
+                    .withHost("PROXY_HOSTNAME")
+                    .withProxyScheme(ProxyScheme.HTTP) // Replace it with HTTPS if the proxy server scheme is https
+                    .withPort(443)
+                    .build();
+
+            // Create client config instance
             ClientConfig clientConfig = ClientConfig.builder()
                     .withConnectTimeout(10000)
                     .withSocketTimeout(40000)
-                    .withProxyScheme(ClientConfig.ProxyScheme.HTTPS) // Replace it with HTTP if the proxy server scheme is http
-                    .withProxyHost("PROXY_HOSTNAME")
-                    .withProxyPort(443)
+                    .withProxyServerConfig(proxyServerConfig)
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
