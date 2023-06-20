@@ -32,15 +32,16 @@ import org.slf4j.LoggerFactory;
 
 public class ExtractTextTableInfoWithCharBoundsFromPDF {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ExtractTextTableInfoWithCharBoundsFromPDF.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExtractTextTableInfoWithCharBoundsFromPDF.class);
 
     public static void main(String[] args) {
 
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             // Create an ExecutionContext using credentials.
@@ -78,5 +79,4 @@ public class ExtractTextTableInfoWithCharBoundsFromPDF {
         String timeStamp = dateTimeFormatter.format(now);
         return("output/ExtractTextTableInfoWithCharBoundsFromPDF/extract" + timeStamp + ".zip");
     }
-
 }

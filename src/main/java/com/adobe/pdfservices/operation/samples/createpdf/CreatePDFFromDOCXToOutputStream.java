@@ -46,8 +46,9 @@ public class CreatePDFFromDOCXToOutputStream {
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
@@ -85,7 +86,6 @@ public class CreatePDFFromDOCXToOutputStream {
         return new FileOutputStream(file);
     }
 
-    //Generates a string containing a directory structure and file name for the output file.
     public static String createOutputFilePath(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();

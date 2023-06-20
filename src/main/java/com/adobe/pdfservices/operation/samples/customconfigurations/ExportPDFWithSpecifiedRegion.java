@@ -44,8 +44,9 @@ public class ExportPDFWithSpecifiedRegion {
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             // Create client config instance with the specified region.

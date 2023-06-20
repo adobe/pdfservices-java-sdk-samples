@@ -31,15 +31,16 @@ import org.slf4j.LoggerFactory;
  */
 public class ExtractTextTableInfoWithStylingFromPDF {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ExtractTextTableInfoWithStylingFromPDF.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExtractTextTableInfoWithStylingFromPDF.class);
 
     public static void main(String[] args) {
 
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             // Create an ExecutionContext using credentials.
@@ -77,5 +78,4 @@ public class ExtractTextTableInfoWithStylingFromPDF {
         String timeStamp = dateTimeFormatter.format(now);
         return("output/ExtractTextTableInfoWithStylingFromPDF/extract" + timeStamp + ".zip");
     }
-
 }

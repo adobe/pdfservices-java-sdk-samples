@@ -11,21 +11,22 @@
 
 package com.adobe.pdfservices.operation.samples.exportpdftoimages;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import com.adobe.pdfservices.operation.ExecutionContext;
-import com.adobe.pdfservices.operation.auth.Credentials;
-import com.adobe.pdfservices.operation.exception.SdkException;
-import com.adobe.pdfservices.operation.exception.ServiceApiException;
-import com.adobe.pdfservices.operation.exception.ServiceUsageException;
-import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.ExportPDFToImagesOperation;
 import com.adobe.pdfservices.operation.pdfops.options.exportpdftoimages.ExportPDFToImagesTargetFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+import com.adobe.pdfservices.operation.auth.Credentials;
+import com.adobe.pdfservices.operation.exception.SdkException;
+import com.adobe.pdfservices.operation.exception.ServiceApiException;
+import com.adobe.pdfservices.operation.exception.ServiceUsageException;
+import com.adobe.pdfservices.operation.io.FileRef;
 
 /**
  * This sample illustrates how to export a PDF file to a list of JPEG files.
@@ -41,8 +42,9 @@ public class ExportPDFToJPEG {
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
@@ -77,5 +79,4 @@ public class ExportPDFToJPEG {
         String timeStamp = dateTimeFormatter.format(now);
         return ("output/ExportPDFToJPEG/export" + timeStamp + "_%s.jpeg");
     }
-
 }

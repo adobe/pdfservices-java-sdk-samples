@@ -34,15 +34,16 @@ import org.slf4j.LoggerFactory;
 
 public class ExtractTextTableInfoWithTableStructureFromPdf {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ExtractTextTableInfoWithTableStructureFromPdf.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExtractTextTableInfoWithTableStructureFromPdf.class);
 
     public static void main(String[] args) {
 
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             // Create an ExecutionContext using credentials.
@@ -81,5 +82,4 @@ public class ExtractTextTableInfoWithTableStructureFromPdf {
         String timeStamp = dateTimeFormatter.format(now);
         return("output/ExtractTextTableInfoWithTableStructureFromPDF/extract" + timeStamp + ".zip");
     }
-
 }
