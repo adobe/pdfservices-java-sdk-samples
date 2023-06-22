@@ -20,6 +20,7 @@ import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.CreatePDFOptions;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.PageLayout;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,8 +44,9 @@ public class CreatePDFFromURL {
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
@@ -52,7 +54,8 @@ public class CreatePDFFromURL {
             CreatePDFOperation htmlToPDFOperation = CreatePDFOperation.createNew();
 
             // Set operation input from a source file.
-            FileRef source = FileRef.createFromURL(new URL("https://developer.adobe.com/document-services/docs/overview/"));
+            // Replace string "URL" with desired url
+            FileRef source = FileRef.createFromURL(new URL("URL"));
             htmlToPDFOperation.setInput(source);
 
             // Provide any custom configuration options for the operation.
@@ -101,5 +104,4 @@ public class CreatePDFFromURL {
         String timeStamp = dateTimeFormatter.format(now);
         return("output/CreatePDFFromURL/create" + timeStamp + ".pdf");
     }
-
 }

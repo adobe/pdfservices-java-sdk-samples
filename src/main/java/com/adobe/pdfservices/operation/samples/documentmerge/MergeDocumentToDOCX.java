@@ -48,8 +48,9 @@ public class MergeDocumentToDOCX {
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             // Setup input data for the document merge process
@@ -107,5 +108,4 @@ public class MergeDocumentToDOCX {
         String timeStamp = dateTimeFormatter.format(now);
         return("output/MergeDocumentToDOCX/merge" + timeStamp + ".docx");
     }
-
 }

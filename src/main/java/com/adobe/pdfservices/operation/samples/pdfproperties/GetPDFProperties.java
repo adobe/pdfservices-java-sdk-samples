@@ -21,6 +21,7 @@ import com.adobe.pdfservices.operation.io.pdfproperties.PDFProperties;
 import com.adobe.pdfservices.operation.pdfops.PDFPropertiesOperation;
 import com.adobe.pdfservices.operation.pdfops.options.pdfproperties.PDFPropertiesOptions;
 import org.slf4j.Logger;
+
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -40,8 +41,9 @@ public class GetPDFProperties {
         try {
 
             // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.serviceAccountCredentialsBuilder()
-                    .fromFile("pdfservices-api-credentials.json")
+            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
+                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
+                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
                     .build();
 
             //Create an ExecutionContext using credentials and create a new operation instance.
