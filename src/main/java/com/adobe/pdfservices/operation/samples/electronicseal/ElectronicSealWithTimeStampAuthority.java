@@ -24,6 +24,9 @@ import com.adobe.pdfservices.operation.pdfops.options.electronicseal.FieldOption
 import com.adobe.pdfservices.operation.pdfops.options.electronicseal.CSCAuthContext;
 import com.adobe.pdfservices.operation.pdfops.options.electronicseal.CertificateCredentials;
 import com.adobe.pdfservices.operation.pdfops.options.electronicseal.SealOptions;
+import com.adobe.pdfservices.operation.pdfops.options.electronicseal.TSABasicAuthCredentials;
+import com.adobe.pdfservices.operation.pdfops.options.electronicseal.TSAOptions;
+import com.adobe.pdfservices.operation.pdfops.options.electronicseal.RFC3161TSAOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,17 +35,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This sample illustrates how to apply electronic seal over the PDF document using default appearance options.
+ * This sample illustrates how to apply electronic seal over the PDF document using time stamp authority options.
  *
  * <p>
  * To know more about PDF Electronic Seal, please see the <a href="https://www.adobe.com/go/dc_eseal_overview_doc" target="_blank">documentation</a>.
  * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
-public class ElectronicSeal {
+public class ElectronicSealWithTimeStampAuthority {
 
     // Initialize the logger.
-    private static final Logger LOGGER = LoggerFactory.getLogger(ElectronicSeal.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ElectronicSealWithTimeStampAuthority.class);
 
     public static void main(String[] args) {
         try {
@@ -106,9 +109,16 @@ public class ElectronicSeal {
                     .withCSCAuthContext(cscAuthContext)
                     .build();
 
+            //Create TSABasicAuthCredentials using username and password
+            TSABasicAuthCredentials tsaBasicAuthCredentials = new TSABasicAuthCredentials("<USERNAME>", "<PASSWORD>");
+
+            //Set the Time Stamp Authority Options using url and TSA Auth credentials
+            TSAOptions tsaOptions = new RFC3161TSAOptions("<TIMESTAMP_URL>", tsaBasicAuthCredentials);
+
             //Create SealOptions instance with sealing parameters.
             SealOptions sealOptions = new SealOptions.Builder(certificateCredentials, fieldOptions)
                     .withDocumentLevelPermission(documentLevelPermission)
+                    .withTSAOptions(tsaOptions)
                     .build();
 
             //Create the PDFElectronicSealOperation instance using the SealOptions instance
@@ -133,10 +143,10 @@ public class ElectronicSeal {
     }
 
     //Generates a string containing a directory structure and file name for the output file.
-    private static String createOutputFilePath(){
+    private static String createOutputFilePath() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
         String timeStamp = dateTimeFormatter.format(now);
-        return("output/ElectronicSeal/sealedOutput" + timeStamp + ".pdf");
+        return ("output/ElectronicSeal/sealedOutputWithTimeStampAuthority" + timeStamp + ".pdf");
     }
 }
