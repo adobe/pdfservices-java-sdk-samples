@@ -18,6 +18,7 @@ import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.PDFElectronicSealOperation;
+import com.adobe.pdfservices.operation.pdfops.options.electronicseal.DocumentLevelPermission;
 import com.adobe.pdfservices.operation.pdfops.options.electronicseal.FieldLocation;
 import com.adobe.pdfservices.operation.pdfops.options.electronicseal.FieldOptions;
 import com.adobe.pdfservices.operation.pdfops.options.electronicseal.CSCAuthContext;
@@ -59,6 +60,9 @@ public class ElectronicSeal {
 
             //Get the background seal image for signature , if required.
             FileRef sealImageFile = FileRef.createFromLocalFile("src/main/resources/sampleSealImage.png");
+
+            // Set the document level permission to be applied for output document
+            DocumentLevelPermission documentLevelPermission = DocumentLevelPermission.FORM_FILLING;
 
             //Set the Seal Field Name to be created in input PDF document.
             String sealFieldName = "Signature1";
@@ -103,7 +107,9 @@ public class ElectronicSeal {
                     .build();
 
             //Create SealOptions instance with sealing parameters.
-            SealOptions sealOptions = new SealOptions.Builder(certificateCredentials, fieldOptions).build();
+            SealOptions sealOptions = new SealOptions.Builder(certificateCredentials, fieldOptions)
+                    .withDocumentLevelPermission(documentLevelPermission)
+                    .build();
 
             //Create the PDFElectronicSealOperation instance using the SealOptions instance
             PDFElectronicSealOperation pdfElectronicSealOperation = PDFElectronicSealOperation.createNew(sealOptions);

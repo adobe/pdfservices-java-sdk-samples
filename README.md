@@ -449,6 +449,13 @@ The sample class ElectronicSealWithAppearanceOptions uses the sealing options wi
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSealWithAppearanceOptions
 ```
 
+#### Apply Electronic Seal With Trusted Timestamp
+
+The sample class ElectronicSealWithTimeStampAuthority uses a time stamp authority to apply electronic seal with trusted timestamp over the PDF document.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSealWithTimeStampAuthority
+```
 
 ### Extract PDF
 
