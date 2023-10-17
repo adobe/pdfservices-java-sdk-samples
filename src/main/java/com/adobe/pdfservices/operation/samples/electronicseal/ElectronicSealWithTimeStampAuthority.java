@@ -58,50 +58,50 @@ public class ElectronicSealWithTimeStampAuthority {
             // Create an ExecutionContext using credentials.
             ExecutionContext executionContext = ExecutionContext.create(credentials);
 
-            //Get the input document to perform the sealing operation
+            // Get the input document to perform the sealing operation.
             FileRef sourceFile = FileRef.createFromLocalFile("src/main/resources/sampleInvoice.pdf");
 
-            //Get the background seal image for signature , if required.
+            // Get the background seal image for signature , if required.
             FileRef sealImageFile = FileRef.createFromLocalFile("src/main/resources/sampleSealImage.png");
 
-            // Set the document level permission to be applied for output document
+            // Set the document level permission to be applied for output document.
             DocumentLevelPermission documentLevelPermission = DocumentLevelPermission.FORM_FILLING;
 
-            //Set the Seal Field Name to be created in input PDF document.
+            // Set the Seal Field Name to be created in input PDF document.
             String sealFieldName = "Signature1";
 
-            //Set the page number in input document for applying seal.
+            // Set the page number in input document for applying seal.
             Integer sealPageNumber = 1;
 
-            //Set if seal should be visible or invisible.
+            // Set if seal should be visible or invisible.
             Boolean sealVisible = true;
 
-            //Create FieldLocation instance and set the coordinates for applying signature
+            // Create FieldLocation instance and set the coordinates for applying signature.
             FieldLocation fieldLocation = new FieldLocation(150, 250, 350, 200);
 
-            //Create FieldOptions instance with required details.
+            // Create FieldOptions instance with required details.
             FieldOptions fieldOptions = new FieldOptions.Builder(sealFieldName)
                     .setFieldLocation(fieldLocation)
                     .setPageNumber(sealPageNumber)
                     .setVisible(sealVisible)
                     .build();
 
-            //Set the name of TSP Provider being used.
+            // Set the name of TSP Provider being used.
             String providerName = "<PROVIDER_NAME>";
 
-            //Set the access token to be used to access TSP provider hosted APIs.
+            // Set the access token to be used to access TSP provider hosted APIs.
             String accessToken = "<ACCESS_TOKEN>";
 
-            //Set the credential ID.
+            // Set the credential ID.
             String credentialID = "<CREDENTIAL_ID>";
 
-            //Set the PIN generated while creating credentials.
+            // Set the PIN generated while creating credentials.
             String pin = "<PIN>";
 
-            //Create CSCAuthContext instance using access token and token type.
+            // Create CSCAuthContext instance using access token and token type.
             CSCAuthContext cscAuthContext = new CSCAuthContext(accessToken, "Bearer");
 
-            //Create CertificateCredentials instance with required certificate details.
+            // Create CertificateCredentials instance with required certificate details.
             CertificateCredentials certificateCredentials = CertificateCredentials.cscCredentialBuilder()
                     .withProviderName(providerName)
                     .withCredentialID(credentialID)
@@ -109,31 +109,31 @@ public class ElectronicSealWithTimeStampAuthority {
                     .withCSCAuthContext(cscAuthContext)
                     .build();
 
-            //Create TSABasicAuthCredentials using username and password
+            // Create TSABasicAuthCredentials using username and password.
             TSABasicAuthCredentials tsaBasicAuthCredentials = new TSABasicAuthCredentials("<USERNAME>", "<PASSWORD>");
 
-            //Set the Time Stamp Authority Options using url and TSA Auth credentials
+            // Set the Time Stamp Authority Options using url and TSA Auth credentials.
             TSAOptions tsaOptions = new RFC3161TSAOptions("<TIMESTAMP_URL>", tsaBasicAuthCredentials);
 
-            //Create SealOptions instance with sealing parameters.
+            // Create SealOptions instance with sealing parameters.
             SealOptions sealOptions = new SealOptions.Builder(certificateCredentials, fieldOptions)
                     .withDocumentLevelPermission(documentLevelPermission)
                     .withTSAOptions(tsaOptions)
                     .build();
 
-            //Create the PDFElectronicSealOperation instance using the SealOptions instance
+            // Create the PDFElectronicSealOperation instance using the SealOptions instance.
             PDFElectronicSealOperation pdfElectronicSealOperation = PDFElectronicSealOperation.createNew(sealOptions);
 
-            //Set the input source file for PDFElectronicSealOperation instance
+            // Set the input source file for PDFElectronicSealOperation instance.
             pdfElectronicSealOperation.setInput(sourceFile);
 
-            //Set the optional input seal image for PDFElectronicSealOperation instance
+            // Set the optional input seal image for PDFElectronicSealOperation instance.
             pdfElectronicSealOperation.setSealImage(sealImageFile);
 
-            //Execute the operation
+            // Execute the operation.
             FileRef result = pdfElectronicSealOperation.execute(executionContext);
 
-            //Save the output at specified location
+            // Save the output at specified location.
             String outputFilePath = createOutputFilePath();
             result.saveAs(outputFilePath);
 
@@ -142,7 +142,7 @@ public class ElectronicSealWithTimeStampAuthority {
         }
     }
 
-    //Generates a string containing a directory structure and file name for the output file.
+    // Generates a string containing a directory structure and file name for the output file.
     private static String createOutputFilePath() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss");
         LocalDateTime now = LocalDateTime.now();
