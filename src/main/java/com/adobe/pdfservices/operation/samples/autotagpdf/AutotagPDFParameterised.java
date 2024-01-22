@@ -1,27 +1,39 @@
 /*
- * Copyright 2023 Adobe
+ * Copyright 2024 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
  * accordance with the terms of the Adobe license agreement accompanying
- * it.If you have received this file from a source other than Adobe,
+ * it. If you have received this file from a source other than Adobe,
  * then your use, modification, or distribution of it requires the prior
  * written permission of Adobe.
  */
 package com.adobe.pdfservices.operation.samples.autotagpdf;
 
 
-import com.adobe.pdfservices.operation.ExecutionContext;
+import com.adobe.pdfservices.operation.PDFServices;
+import com.adobe.pdfservices.operation.PDFServicesMediaType;
+import com.adobe.pdfservices.operation.PDFServicesResponse;
 import com.adobe.pdfservices.operation.auth.Credentials;
+import com.adobe.pdfservices.operation.auth.ServicePrincipalCredentials;
+import com.adobe.pdfservices.operation.exception.SDKException;
 import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
-import com.adobe.pdfservices.operation.io.FileRef;
-import com.adobe.pdfservices.operation.io.autotag.AutotagPDFOutput;
-import com.adobe.pdfservices.operation.pdfops.AutotagPDFOperation;
-import com.adobe.pdfservices.operation.pdfops.options.autotag.AutotagPDFOptions;
+import com.adobe.pdfservices.operation.io.Asset;
+import com.adobe.pdfservices.operation.io.StreamAsset;
+import com.adobe.pdfservices.operation.pdfjobs.jobs.AutotagPDFJob;
+import com.adobe.pdfservices.operation.pdfjobs.params.autotag.AutotagPDFParams;
+import com.adobe.pdfservices.operation.pdfjobs.result.AutotagPDFResult;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 /**
@@ -31,59 +43,73 @@ import java.util.Arrays;
  */
 public class AutotagPDFParameterised {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AutotagPDFParameterised.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AutotagPDFParameterised.class);
 
     public static void main(String[] args) {
-        LOGGER.info("--input " + getInputFilePathFromCmdArgs(args));
-        LOGGER.info("--output " + getOutputFilePathFromCmdArgs(args));
-        LOGGER.info("--report " + getGenerateReportFromCmdArgs(args));
-        LOGGER.info("--shift_headings " + getShiftHeadingsFromCmdArgs(args));
 
-        try {
-            // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
-                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
-                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
-                    .build();
+        try (InputStream inputStream = Files.newInputStream(new File(getInputFilePathFromCmdArgs(args)).toPath())) {
+            LOGGER.info("--input " + getInputFilePathFromCmdArgs(args));
+            LOGGER.info("--output " + getOutputFilePathFromCmdArgs(args));
+            LOGGER.info("--report " + getGenerateReportFromCmdArgs(args));
+            LOGGER.info("--shift_headings " + getShiftHeadingsFromCmdArgs(args));
 
-            //Create an ExecutionContext using credentials and create a new operation instance.
-            ExecutionContext executionContext = ExecutionContext.create(credentials);
+            // Initial setup, create credentials instance
+            Credentials credentials = new ServicePrincipalCredentials(System.getenv("PDF_SERVICES_CLIENT_ID"), System.getenv("PDF_SERVICES_CLIENT_SECRET"));
 
-            AutotagPDFOperation autotagPDFOperation = AutotagPDFOperation.createNew();
+            // Creates a PDF Services instance
+            PDFServices pdfServices = new PDFServices(credentials);
 
-            // Set input for operation from command line args
-            autotagPDFOperation.setInput(FileRef.createFromLocalFile(getInputFilePathFromCmdArgs(args)));
+            // Creates an asset(s) from source file(s) and upload
+            Asset asset = pdfServices.upload(inputStream, PDFServicesMediaType.PDF.getMediaType());
 
-            // Get and Build AutotagPDF options from command line args and set them into the operation
-            AutotagPDFOptions autotagPDFOptions = getOptionsFromCmdArgs(args);
-            autotagPDFOperation.setOptions(autotagPDFOptions);
+            // Create parameters for the job
+            AutotagPDFParams autotagPDFParams = getOptionsFromCmdArgs(args);
 
-            // Execute the operation
-            AutotagPDFOutput autotagPDFOutput = autotagPDFOperation.execute(executionContext);
+            // Creates a new job instance
+            AutotagPDFJob autotagPDFJob = new AutotagPDFJob(asset).setParams(autotagPDFParams);
 
-            // Save the output files at the specified location
+            // Submit the job and gets the job result
+            String location = pdfServices.submit(autotagPDFJob);
+            PDFServicesResponse<AutotagPDFResult> pdfServicesResponse = pdfServices.getJobResult(location, AutotagPDFResult.class);
+
+            // Get content from the resulting asset(s)
+            Asset resultAsset = pdfServicesResponse.getResult().getTaggedPDF();
+            Asset resultAssetReport = pdfServicesResponse.getResult().getReport();
+            StreamAsset streamAsset = pdfServices.getContent(resultAsset);
+            StreamAsset streamAssetReport = (autotagPDFParams != null && autotagPDFParams.isGenerateReport()) ? pdfServices.getContent(resultAssetReport) : null;
+
+            // Creating output streams and copying stream assets' content to it
             String outputPath = getOutputFilePathFromCmdArgs(args);
-            autotagPDFOutput.getTaggedPDF().saveAs(outputPath + "autotagPDFInput-tagged.pdf");
-            if (autotagPDFOptions != null && autotagPDFOptions.isGenerateReport())
-                autotagPDFOutput.getReport().saveAs(outputPath + "autotagPDFInput-report.xlsx");
+            String outputFilePath = outputPath + "autotagPDFInput-tagged.pdf";
+            LOGGER.info(String.format("Saving asset at %s", outputFilePath));
 
-        } catch (ServiceApiException | IOException | ServiceUsageException e) {
-            System.out.println(e);
+            OutputStream outputStream = Files.newOutputStream(new File(outputFilePath).toPath());
+            IOUtils.copy(streamAsset.getInputStream(), outputStream);
+            outputStream.close();
+            if (streamAssetReport != null) {
+                String outputFilePathReport = outputPath + "autotagPDFInput-report.xlsx";
+                LOGGER.info(String.format("Saving asset at %s", outputFilePathReport));
+
+                OutputStream outputStreamReport = Files.newOutputStream(new File(outputFilePathReport).toPath());
+                IOUtils.copy(streamAssetReport.getInputStream(), outputStreamReport);
+                outputStreamReport.close();
+            }
+        } catch (ServiceApiException | IOException | SDKException | ServiceUsageException e) {
+            LOGGER.error("Exception encountered while executing operation", e);
         }
     }
 
-    private static AutotagPDFOptions getOptionsFromCmdArgs(String[] args) {
+    private static AutotagPDFParams getOptionsFromCmdArgs(String[] args) {
         Boolean generateReport = getGenerateReportFromCmdArgs(args);
         Boolean shiftHeadings = getShiftHeadingsFromCmdArgs(args);
-
-        AutotagPDFOptions.Builder builder = AutotagPDFOptions.autotagPDFOptionsBuilder();
+        AutotagPDFParams.Builder autotagPDFParamsBuilder = AutotagPDFParams.autotagPDFParamsBuilder();
 
         if (generateReport)
-            builder.generateReport();
+            autotagPDFParamsBuilder.generateReport();
         if (shiftHeadings)
-            builder.shiftHeadings();
+            autotagPDFParamsBuilder.shiftHeadings();
 
-        return builder.build();
+        return autotagPDFParamsBuilder.build();
     }
 
     private static Boolean getShiftHeadingsFromCmdArgs(String[] args) {
@@ -100,12 +126,12 @@ public class AutotagPDFParameterised {
         if (inputFilePathIndex >= 0 && inputFilePathIndex < args.length - 1) {
             inputFilePath = args[inputFilePathIndex + 1];
         } else
-            LOGGER.info("input file not specified, using default value : autotagPdfInput.pdf");
+            LOGGER.info("input file not specified, using default value : autotagPDFInput.pdf");
 
         return inputFilePath;
     }
 
-    private static String getOutputFilePathFromCmdArgs(String[] args) {
+    private static String getOutputFilePathFromCmdArgs(String[] args) throws IOException {
         String outputFilePath = "output/AutotagPDFParameterised/";
         int outputFilePathIndex = Arrays.asList(args).indexOf("--output");
         if (outputFilePathIndex >= 0 && outputFilePathIndex < args.length - 1) {
@@ -113,6 +139,7 @@ public class AutotagPDFParameterised {
         } else
             LOGGER.info("output path not specified, using default value : " + outputFilePath);
 
+        Files.createDirectories(Paths.get(outputFilePath));
         return outputFilePath;
     }
 }

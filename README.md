@@ -7,7 +7,7 @@ the SDK. **Please note that the PDF Services Java SDK supports only server side 
 
 ## Prerequisites
 The sample application has the following requirements:
-* Java JDK : Version 8 or above.
+* Java JDK : Version 11 or above.
 * Build Tool: The application requires Maven to be installed. Maven installation instructions can be found 
 [here](https://maven.apache.org/install.html).
 
@@ -28,10 +28,6 @@ export PDF_SERVICES_CLIENT_SECRET=<YOUR CLIENT SECRET>
 set PDF_SERVICES_CLIENT_ID=<YOUR CLIENT ID>
 set PDF_SERVICES_CLIENT_SECRET=<YOUR CLIENT SECRET>
 ```
-
-The SDK also supports providing the authentication credentials at runtime, without storing them in a config file. Please
-refer this [section](#create-a-pdf-file-from-a-docx-file-by-providing-in-memory-authentication-credentials) to 
-know more.
 
 ## Client Configurations
 
@@ -74,8 +70,8 @@ files used by the samples can be found in ```src/main/resources/```. When execut
 child folder under the working directory to store their results.
 
 ### Create a PDF File
-These samples illustrate how to convert files of some formats to PDF. Refer the documentation of CreatePDFOperation.java 
-to see the list of all supported media types which can be converted to PDF.
+These samples illustrate how to convert files of supported formats to PDF.
+Refer the [Create PDF API documentation](https://developer.adobe.com/document-services/docs/apis/#tag/Create-PDF/operation/pdfoperations.createpdf) to see the list of all supported media types which can be converted to PDF.
 
 ####  Create a PDF File From a DOCX File 
 
@@ -94,24 +90,6 @@ the language of input file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromDOCXWithOptions 
 ```
 
-####  Create a PDF File From a DOCX Input Stream
-
-The sample class CreatePDFFromDOCXInputStream creates a PDF file from a DOCX input stream.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromDOCXInputStream 
-```
-
-####  Create a PDF File From a DOCX File (Write to an OutputStream)
-
-The sample class CreatePDFFromDOCXToOutputStream creates a PDF file from a DOCX file. Instead of saving the result to a 
-local file, it writes the result to an output stream.
-
-```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromDOCXToOutputStream 
-```
-
-
 ####  Create a PDF File From a PPTX File 
 
 The sample class CreatePDFFromPPTX creates a PDF file from a PPTX file.
@@ -120,45 +98,49 @@ The sample class CreatePDFFromPPTX creates a PDF file from a PPTX file.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromPPTX
 ```
 
+### Create a PDF File From HTML
+These samples illustrate how to convert HTML to PDF. 
+Refer the [HTML to PDF API documentation](https://developer.adobe.com/document-services/docs/apis/#tag/Html-to-PDF/operation/pdfoperations.htmltopdf) to see instructions on the structure of the zip file.
+
 #### Create a PDF File From a Static HTML file with inline CSS
 
-The sample class CreatePDFFromHTMLWithInlineCSS creates a PDF file from an input HTML file with inline CSS.
+The sample class HTMLWithInlineCSSToPDF creates a PDF file from an input HTML file with inline CSS.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromHTMLWithInlineCSS 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.htmltopdf.HTMLWithInlineCSSToPDF 
 ```
 
 #### Create a PDF File From HTML specified via URL
 
-The sample class CreatePDFFromURL creates a PDF file from an HTML specified via URL.
+The sample class HTMLToPDFFromURL creates a PDF file from an HTML specified via URL.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromURL 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.htmltopdf.HTMLToPDFFromURL 
 ```
 
 #### Create a PDF File From Static HTML (via Zip Archive)
 
-The sample class CreatePDFFromStaticHTML creates a PDF file from a zip file containing the input HTML file and its resources.
-Please refer the documentation of CreatePDFOperation.java to see instructions on the structure of the zip file.
+The sample class StaticHTMLToPDF creates a PDF file from a zip file containing the input HTML file and its resources.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromStaticHTML 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.htmltopdf.StaticHTMLToPDF 
 ```
 
 #### Create a PDF File From Dynamic HTML (via Zip Archive)
 
-The sample class CreatePDFFromDynamicHTML converts a zip file, containing the input HTML file and its resources, along 
-with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM, 
-thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML 
+The sample class DynamicHTMLToPDF converts a zip file, containing the input HTML file and its resources, along
+with the input data to a PDF file. The input data is used by the javascript in the HTML file to manipulate the HTML DOM,
+thus effectively updating the source HTML file. This mechanism can be used to provide data to the template HTML
 dynamically and then, convert it into a PDF file.
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.createpdf.CreatePDFFromDynamicHTML 
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.htmltopdf.DynamicHTMLToPDF 
 ```
 
+
 ### Export PDF To Other Formats
-These samples illustrate how to export PDF files to other formats. Refer to the documentation of ExportPDFOperation.java 
-and ExportPDFToImagesOperation.java for supported export formats.
+These samples illustrate how to export PDF files to other formats. Refer [Export PDF API documentation](https://developer.adobe.com/document-services/docs/apis/#tag/Export-PDF/operation/pdfoperations.exportpdf) 
+and [Export PDF To Images API documentation](https://developer.adobe.com/document-services/docs/apis/#tag/PDF-To-Images) for supported export formats.
 
 #### Export a PDF File To a DOCX File 
 
@@ -206,7 +188,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Combine Specific Pages of Multiple PDF Files
 
-The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into into a single PDF file.
+The sample class CombinePDFWithPageRanges combines specific pages of multiple PDF files into a single PDF file.
  
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.combinepdf.CombinePDFWithPageRanges 
@@ -457,19 +439,20 @@ The sample class ElectronicSealWithTimeStampAuthority uses a time stamp authorit
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.electronicseal.ElectronicSealWithTimeStampAuthority
 ```
 
+
 ### Extract PDF
 
 These samples illustrate extracting content of PDF in a structured JSON format along with the renditions inside PDF. 
 The output of SDK extract operation is Zip package. The Zip package consists of following:
 
 * The structuredData.json file with the extracted content & PDF element structure. See the [JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchema.json). Please refer the [Styling JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchemaStylingInfo.json) for a description of the output when the styling option is enabled. 
-* A renditions folder(s) containing renditions for each element type selected as input. 
+* A renditions' folder(s) containing renditions for each element type selected as input. 
   The folder name is either “tables” or “figures” depending on your specified element type. 
   Each folder contains renditions with filenames that correspond to the element information in the JSON file. 
   
 #### Extract Text Elements
 
-The sample class ExtractTextInfoFromPDF.java extracts text elements from PDF document.
+The sample class ExtractTextInfoFromPDF extracts text elements from PDF document.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextInfoFromPDF
@@ -522,12 +505,12 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Extract Text, Table Elements with Renditions and CSV's of Table Elements 
 
-The sample class ExtractTextTableInfoWithTableStructureFromPdf extracts text, table elements, table structures as CSV and 
+The sample class ExtractTextTableInfoWithTableStructureFromPDF extracts text, table elements, table structures as CSV and 
 table element's renditions from PDF document. Note that the output is a zip containing the structured information 
 along with renditions as described in [section](#extract-pdf).
 
 ```$xslt
-mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoWithTableStructureFromPdf
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.extractpdf.ExtractTextTableInfoWithTableStructureFromPDF
 ```
 
 #### Extract Text, Table Elements with Styling information of text
@@ -553,8 +536,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 ### Custom Client Configuration
 
-These samples illustrate how to provide a custom client configurations(timeouts, proxy etc) and in-memory authentication 
-credentials.
+These samples illustrate how to provide a custom client configurations(timeouts, proxy etc.).
 
 #### Create a PDF File From a DOCX File (By providing custom value for timeouts)
 
@@ -566,7 +548,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create a PDF File From a DOCX File (By providing Proxy Server settings)
 
-The sample class CreatePDFWithPorxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
+The sample class CreatePDFWithProxyServer highlights how to provide Proxy Server configurations to allow all API calls via that proxy Server.
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.customconfigurations.CreatePDFWithProxyServer
@@ -611,7 +593,7 @@ mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.sample
 
 #### Create Tagged PDF from a PDF by setting options with command line arguments
 
-The sample project AutotagPDFParamaterised highlights how to add tags to PDF documents to make the PDF more accessible by setting options through command line arguments.
+The sample project AutotagPDFParameterised highlights how to add tags to PDF documents to make the PDF more accessible by setting options through command line arguments.
 
 Here is a sample list of command line arguments and their description: </br>
 --input &lt; input file path &gt; </br>
@@ -621,6 +603,25 @@ Here is a sample list of command line arguments and their description: </br>
 
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFParameterised -Dexec.args="--report --shift_headings --input src/main/resources/autotagPDFInput.pdf --output output/AutotagPDFParamaterised/"
+```
+
+### External Input / Output Storage
+These samples illustrate how to use external input and output storage for the supported operations.
+
+####  Create a PDF File From a DOCX File Using External Input Storage
+
+The sample class ExternalInputCreatePDFFromDOCX creates a PDF file from a DOCX file stored at external storage.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.externalstorage.ExternalInputCreatePDFFromDOCX 
+```
+
+####  Create a PDF File From a DOCX File Using External Input Storage and Store the Result in External Output Storage
+
+The sample class ExternalInputAndOutputCreatePDFFromDOCX creates a PDF file from a DOCX file stored at external storage and stores the result in external output storage.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.externalstorage.ExternalInputAndOutputCreatePDFFromDOCX 
 ```
 
 ### Licensing

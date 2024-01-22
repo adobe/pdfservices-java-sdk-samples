@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe
+ * Copyright 2024 Adobe
  * All Rights Reserved.
  *
  * NOTICE: Adobe permits you to use, modify, and distribute this file in
@@ -11,64 +11,69 @@
 
 package com.adobe.pdfservices.operation.samples.pdfproperties;
 
-import com.adobe.pdfservices.operation.ExecutionContext;
+import com.adobe.pdfservices.operation.PDFServices;
+import com.adobe.pdfservices.operation.PDFServicesMediaType;
+import com.adobe.pdfservices.operation.PDFServicesResponse;
 import com.adobe.pdfservices.operation.auth.Credentials;
-import com.adobe.pdfservices.operation.exception.SdkException;
+import com.adobe.pdfservices.operation.auth.ServicePrincipalCredentials;
+import com.adobe.pdfservices.operation.exception.SDKException;
 import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.exception.ServiceUsageException;
-import com.adobe.pdfservices.operation.io.FileRef;
-import com.adobe.pdfservices.operation.io.pdfproperties.PDFProperties;
-import com.adobe.pdfservices.operation.pdfops.PDFPropertiesOperation;
-import com.adobe.pdfservices.operation.pdfops.options.pdfproperties.PDFPropertiesOptions;
+import com.adobe.pdfservices.operation.io.Asset;
+import com.adobe.pdfservices.operation.pdfjobs.jobs.PDFPropertiesJob;
+import com.adobe.pdfservices.operation.pdfjobs.params.pdfproperties.PDFPropertiesParams;
+import com.adobe.pdfservices.operation.pdfjobs.result.PDFPropertiesResult;
+import com.adobe.pdfservices.operation.pdfjobs.result.pdfproperties.PDFProperties;
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 /**
  * This sample illustrates how to retrieve properties of an input PDF file.
- *
+ * <p>
  * Refer to README.md for instructions on how to run the samples.
  */
 public class GetPDFProperties {
 
-    // Initialize the logger.
+    // Initialize the logger
     private static final Logger LOGGER = LoggerFactory.getLogger(GetPDFProperties.class);
 
     public static void main(String[] args) {
 
-        try {
+        try (
+                InputStream inputStream = Files.newInputStream(new File("src/main/resources/pdfPropertiesInput.pdf").toPath())) {
+            // Initial setup, create credentials instance
+            Credentials credentials = new ServicePrincipalCredentials(System.getenv("PDF_SERVICES_CLIENT_ID"), System.getenv("PDF_SERVICES_CLIENT_SECRET"));
 
-            // Initial setup, create credentials instance.
-            Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
-                    .withClientId(System.getenv("PDF_SERVICES_CLIENT_ID"))
-                    .withClientSecret(System.getenv("PDF_SERVICES_CLIENT_SECRET"))
+            // Creates a PDF Services instance
+            PDFServices pdfServices = new PDFServices(credentials);
+
+            // Creates an asset(s) from source file(s) and upload
+            Asset asset = pdfServices.upload(inputStream, PDFServicesMediaType.PDF.getMediaType());
+
+            // Create parameters for the job
+            PDFPropertiesParams pdfPropertiesParams = PDFPropertiesParams.pdfPropertiesParamsBuilder()
+                    .includePageLevelProperties()
                     .build();
 
-            //Create an ExecutionContext using credentials and create a new operation instance.
-            ExecutionContext executionContext = ExecutionContext.create(credentials);
-            PDFPropertiesOperation pdfPropertiesOperation = PDFPropertiesOperation.createNew();
+            // Creates a new job instance
+            PDFPropertiesJob pdfPropertiesJob = new PDFPropertiesJob(asset).setParams(pdfPropertiesParams);
 
-            // Provide an input FileRef for the operation
-            FileRef source = FileRef.createFromLocalFile("src/main/resources/pdfPropertiesInput.pdf");
-            pdfPropertiesOperation.setInputFile(source);
+            // Submit the job and gets the job result
+            String location = pdfServices.submit(pdfPropertiesJob);
+            PDFServicesResponse<PDFPropertiesResult> pdfServicesResponse = pdfServices.getJobResult(location, PDFPropertiesResult.class);
 
-            // Build PDF Properties options to include page level properties and set them into the operation
-            PDFPropertiesOptions pdfPropertiesOptions = PDFPropertiesOptions.PDFPropertiesOptionsBuilder()
-                    .includePageLevelProperties(true)
-                    .build();
-            pdfPropertiesOperation.setOptions(pdfPropertiesOptions);
-
-            // Execute the operation.
-            PDFProperties pdfProperties = pdfPropertiesOperation.execute(executionContext);
+            PDFProperties pdfProperties = pdfServicesResponse.getResult().getPdfProperties();
 
             // Fetch the requisite properties of the specified PDF.
             LOGGER.info("Size of the specified PDF file: {}", pdfProperties.getDocument().getFileSize());
             LOGGER.info("Version of the specified PDF file: {}", pdfProperties.getDocument().getPDFVersion());
             LOGGER.info("Page count of the specified PDF file: {}", pdfProperties.getDocument().getPageCount());
-
-        } catch (ServiceApiException | IOException | SdkException | ServiceUsageException ex) {
+        } catch (ServiceApiException | IOException | SDKException | ServiceUsageException ex) {
             LOGGER.error("Exception encountered while executing operation", ex);
         }
     }
