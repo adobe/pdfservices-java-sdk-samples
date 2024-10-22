@@ -534,6 +534,25 @@ The sample class GetPDFProperties fetches the properties of an input PDF.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfproperties.GetPDFProperties
 ```
 
+### PDF Watermark
+This sample illustrates how to add watermark to a PDF file.
+
+#### Add watermark to a PDF file
+
+The sample class PDFWatermark adds watermark to a PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfwatermark.PDFWatermark
+```
+
+#### Add watermark to a PDF file with options
+
+The sample class PDFWatermarkWithOptions adds watermark to a PDF file with watermark appearance and page range options.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfwatermark.PDFWatermarkWithOptions
+```
+
 ### Custom Client Configuration
 
 These samples illustrate how to provide a custom client configurations(timeouts, proxy etc.).
@@ -604,6 +623,25 @@ Here is a sample list of command line arguments and their description: </br>
 ```$xslt
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.autotagpdf.AutotagPDFParameterised -Dexec.args="--report --shift_headings --input src/main/resources/autotagPDFInput.pdf --output output/AutotagPDFParamaterised/"
 ```
+
+### Accessibility Checker
+
+#### Run Accessibility Checker on Input PDF
+
+This sample illustrates how to run accessibility Checker on input PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfaccessibilitychecker.PDFAccessibilityChecker -Dexec.args="--report --shift_headings --input src/main/resources/accessibilityCheckerInput.pdf --output output/PDFAccessibilityChecker/"
+```
+
+#### Run Accessibility Checker on input PDF file for given page start and page end
+
+This sample illustrates how to run accessibility Checker on input PDF file for given page start and page end
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.pdfaccessibilitychecker.PDFAccessibilityCheckerWithOptions -Dexec.args="--report --shift_headings --input src/main/resources/accessibilityCheckerInput.pdf --output output/PDFAccessibilityCheckerWithOptions/"
+```
+
 
 ### External Input / Output Storage
 These samples illustrate how to use external input and output storage for the supported operations.
