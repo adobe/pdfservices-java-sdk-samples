@@ -251,6 +251,29 @@ The sample class LinearizePDF optimizes the PDF file for a faster Web View.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.linearizepdf.LinearizePDF
 ```
 
+### Import/Export PDF Form Data
+
+These samples illustrate how to import and export form data from PDF files using JSON format.
+
+#### Export Form Data from a PDF File
+
+The sample class ExportPDFFormData exports form data from a PDF file into a JSON format.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdfformdata.ExportPDFFormData
+```
+
+#### Import Form Data into a PDF File
+
+The sample class ImportPDFFormData imports form data from a JSON file into a PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.importpdfformdata.ImportPDFFormData
+```
+
+##### Notes
+- Field names in the JSON must match the field names in the PDF form
+
 ### Protect PDF File
 
 These samples illustrate how to secure a PDF file with a password.
@@ -447,7 +470,7 @@ The output of SDK extract operation is Zip package. The Zip package consists of 
 
 * The structuredData.json file with the extracted content & PDF element structure. See the [JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchema.json). Please refer the [Styling JSON schema](https://opensource.adobe.com/pdftools-sdk-docs/release/shared/extractJSONOutputSchemaStylingInfo.json) for a description of the output when the styling option is enabled. 
 * A renditions' folder(s) containing renditions for each element type selected as input. 
-  The folder name is either “tables” or “figures” depending on your specified element type. 
+  The folder name is either "tables" or "figures" depending on your specified element type. 
   Each folder contains renditions with filenames that correspond to the element information in the JSON file. 
   
 #### Extract Text Elements
