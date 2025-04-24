@@ -251,6 +251,29 @@ The sample class LinearizePDF optimizes the PDF file for a faster Web View.
 mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.linearizepdf.LinearizePDF
 ```
 
+### Import/Export PDF Form Data
+
+These samples illustrate how to import and export form data from PDF files using JSON format.
+
+#### Export Form Data from a PDF File
+
+The sample class ExportPDFFormData exports form data from a PDF file into a JSON format.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.exportpdfformdata.ExportPDFFormData
+```
+
+#### Import Form Data into a PDF File
+
+The sample class ImportPDFFormData imports form data from a JSON file into a PDF file.
+
+```$xslt
+mvn -f pom.xml exec:java -Dexec.mainClass=com.adobe.pdfservices.operation.samples.importpdfformdata.ImportPDFFormData
+```
+
+##### Notes
+- Field names in the JSON must match the field names in the PDF form
+
 ### Protect PDF File
 
 These samples illustrate how to secure a PDF file with a password.
